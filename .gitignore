@@ -2,6 +2,8 @@
 bin/
 obj/
 Build/
+*.exe
+*.bmp
 
 # Ignore Visual Studio files
 .vs/

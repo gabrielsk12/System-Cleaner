@@ -126,7 +126,7 @@ namespace WindowsCleaner.Services
                     { 
                         StartBoundary = DateTime.Today.Add(_settings.ScheduleSettings.Time) 
                     },
-                    ScheduleFrequency.Weekly => new WeeklyTrigger(_settings.ScheduleSettings.DayOfWeek) 
+                    ScheduleFrequency.Weekly => new WeeklyTrigger((Microsoft.Win32.TaskScheduler.DaysOfTheWeek)(1 << (int)_settings.ScheduleSettings.DayOfWeek)) 
                     { 
                         StartBoundary = DateTime.Today.Add(_settings.ScheduleSettings.Time) 
                     },
