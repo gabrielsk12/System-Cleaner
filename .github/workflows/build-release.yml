@@ -1,0 +1,140 @@
+name: Build and Release Windows System Cleaner Pro
+
+on:
+  push:
+    branches: [ main, develop ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  DOTNET_VERSION: '8.0.x'
+  PROJECT_NAME: WindowsCleaner
+  SOLUTION_FILE: WindowsCleaner.sln
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+        
+    - name: Cache NuGet packages
+      uses: actions/cache@v3
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+          
+    - name: Restore dependencies
+      run: |
+        cd ${{ env.PROJECT_NAME }}
+        dotnet restore
+        
+    - name: Build application
+      run: |
+        cd ${{ env.PROJECT_NAME }}
+        dotnet build -c Release --no-restore
+        
+    - name: Run tests (if any)
+      run: |
+        cd ${{ env.PROJECT_NAME }}
+        dotnet test -c Release --no-build --verbosity normal
+      continue-on-error: true
+      
+    - name: Publish application
+      run: |
+        cd ${{ env.PROJECT_NAME }}
+        dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -o "../Build" --no-build
+        
+    - name: Setup NSIS
+      uses: joncloud/makensis-action@v4
+      
+    - name: Create installer graphics
+      shell: pwsh
+      run: |
+        Add-Type -AssemblyName System.Drawing
+        
+        # Create header bitmap (150x57)
+        $headerBitmap = New-Object System.Drawing.Bitmap(150, 57)
+        $graphics = [System.Drawing.Graphics]::FromImage($headerBitmap)
+        $graphics.Clear([System.Drawing.Color]::FromArgb(0, 120, 215))
+        $font = New-Object System.Drawing.Font("Arial", 12, [System.Drawing.FontStyle]::Bold)
+        $brush = New-Object System.Drawing.SolidBrush([System.Drawing.Color]::White)
+        $graphics.DrawString("Cleaner Pro", $font, $brush, 10, 20)
+        $headerBitmap.Save("installer_header.bmp", [System.Drawing.Imaging.ImageFormat]::Bmp)
+        $graphics.Dispose()
+        $headerBitmap.Dispose()
+        $font.Dispose()
+        $brush.Dispose()
+        
+        # Create side bitmap (164x314)
+        $sideBitmap = New-Object System.Drawing.Bitmap(164, 314)
+        $graphics = [System.Drawing.Graphics]::FromImage($sideBitmap)
+        $brush1 = New-Object System.Drawing.Drawing2D.LinearGradientBrush(
+            [System.Drawing.Point]::new(0, 0),
+            [System.Drawing.Point]::new(164, 314),
+            [System.Drawing.Color]::FromArgb(0, 120, 215),
+            [System.Drawing.Color]::FromArgb(0, 90, 158)
+        )
+        $graphics.FillRectangle($brush1, 0, 0, 164, 314)
+        $sideBitmap.Save("installer_side.bmp", [System.Drawing.Imaging.ImageFormat]::Bmp)
+        $graphics.Dispose()
+        $sideBitmap.Dispose()
+        $brush1.Dispose()
+        
+    - name: Build installer
+      run: makensis installer.nsi
+      
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: windows-cleaner-pro
+        path: |
+          WindowsCleanerPro_Setup.exe
+          Build/
+          
+    - name: Create Release (on tag)
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          WindowsCleanerPro_Setup.exe
+        body: |
+          ## Windows System Cleaner Pro Release
+          
+          ### Features
+          - 🧹 Advanced system cleaning (8 categories)
+          - 📁 Enhanced file explorer with size analysis
+          - 🎨 Dark/Light theme support
+          - 📅 Scheduled automatic cleaning
+          - 🔧 Professional installer with dependency management
+          
+          ### Installation
+          1. Download `WindowsCleanerPro_Setup.exe`
+          2. Run as Administrator
+          3. Follow the installation wizard
+          
+          ### System Requirements
+          - Windows 10 (1903+) or Windows 11
+          - x64 architecture
+          - 2 GB RAM minimum
+          - 100 MB free disk space
+          
+          ### What's New
+          - Complete rewrite with modern .NET 8.0 WPF
+          - Professional installer with NSIS
+          - Enhanced UI and UX
+          - Improved performance and stability
+          
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

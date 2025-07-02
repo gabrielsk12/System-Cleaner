@@ -1,0 +1,13 @@
+// This is a placeholder for the application icon (icon.ico)
+// The actual icon file should be created using an icon editor
+// or converted from a PNG image using online tools
+
+// Recommended icon sizes for Windows:
+// - 16x16, 32x32, 48x48, 256x256 pixels
+// - ICO format with transparency support
+
+// For now, the application will use the default Windows executable icon.
+// To add a custom icon:
+// 1. Create or download a suitable icon file (icon.ico)
+// 2. Place it in the WindowsCleaner project folder
+// 3. The build system will automatically include it
