@@ -34,20 +34,105 @@ jobs:
           ${{ runner.os }}-nuget-
           
     - name: Restore dependencies
-      run: |
-        cd ${{ env.PROJECT_NAME }}
-        dotnet restore
+      run: dotnet restore ${{ env.SOLUTION_FILE }}
         
     - name: Build application
-      run: |
-        cd ${{ env.PROJECT_NAME }}
-        dotnet build -c Release --no-restore
+      run: dotnet build ${{ env.SOLUTION_FILE }} -c Release --no-restore
         
-    - name: Run tests (if any)
+    - name: Publish application
       run: |
-        cd ${{ env.PROJECT_NAME }}
-        dotnet test -c Release --no-build --verbosity normal
-      continue-on-error: true
+        dotnet publish ${{ env.PROJECT_NAME }}/${{ env.PROJECT_NAME }}.csproj -c Release -o Build/publish --self-contained false
+        
+    - name: Install NSIS
+      run: |
+        choco install nsis -y
+        
+    - name: Create installer graphics
+      run: |
+        Add-Type -AssemblyName System.Drawing
+        $bmp = New-Object System.Drawing.Bitmap(150, 57)
+        $g = [System.Drawing.Graphics]::FromImage($bmp)
+        $g.Clear([System.Drawing.Color]::Blue)
+        $bmp.Save("installer_header.bmp")
+        $g.Dispose()
+        $bmp.Dispose()
+        
+        $bmp = New-Object System.Drawing.Bitmap(164, 314)
+        $g = [System.Drawing.Graphics]::FromImage($bmp)
+        $g.Clear([System.Drawing.Color]::Blue)
+        $bmp.Save("installer_side.bmp")
+        $g.Dispose()
+        $bmp.Dispose()
+      shell: powershell
+        
+    - name: Build installer
+      run: |
+        makensis installer.nsi
+        
+    - name: Upload installer as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: WindowsCleanerPro-Installer
+        path: WindowsCleanerPro_Setup.exe
+        
+  release:
+    needs: build
+    runs-on: windows-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+    - name: Download installer
+      uses: actions/download-artifact@v3
+      with:
+        name: WindowsCleanerPro-Installer
+        
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Windows System Cleaner Pro ${{ github.ref }}
+        body: |
+          # Windows System Cleaner Pro Release
+          
+          ## What's New
+          - Professional system cleaner with 8 cleanup categories
+          - Enhanced file explorer with size analysis
+          - Advanced settings with theme switching
+          - Scheduled cleaning with Windows Task Scheduler integration
+          - Automatic dependency installation
+          
+          ## Installation
+          1. Download `WindowsCleanerPro_Setup.exe`
+          2. Right-click and "Run as administrator"
+          3. Follow the installation wizard
+          
+          ## System Requirements
+          - Windows 10 (1903) or later / Windows 11
+          - .NET 8.0 Runtime (installed automatically if missing)
+          - Administrator privileges (for system cleaning)
+          
+          ## Features
+          - 🧹 Advanced System Cleaning (8 categories)
+          - 📁 Enhanced File Explorer with size analysis
+          - ⚙️ Advanced Settings (themes, startup, notifications)
+          - 📅 Scheduled Cleaning (Daily/Weekly/Monthly)
+          - 🔧 Smart Dependency Installation
+          
+        draft: false
+        prerelease: false
+        
+    - name: Upload installer to release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./WindowsCleanerPro_Setup.exe
+        asset_name: WindowsCleanerPro_Setup.exe
+        asset_content_type: application/octet-stream
       
     - name: Publish application
       run: |

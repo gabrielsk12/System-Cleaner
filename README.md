@@ -6,6 +6,16 @@ A professional-grade Windows system optimization tool built with modern C# WPF t
 ![.NET](https://img.shields.io/badge/.NET-8.0-purple?style=for-the-badge&logo=dotnet)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
+## 🚀 Quick Start
+
+### Download & Install
+1. **[📥 Download Latest Release](https://github.com/gabrielsk12/System-Cleaner/releases/latest)** - Get `WindowsCleanerPro_Setup.exe`
+2. **Right-click** the installer and select "Run as administrator"
+3. **Follow** the installation wizard
+4. **Launch** from desktop shortcut or Start Menu
+
+*The installer automatically detects and installs required dependencies (.NET 8.0) if missing.*
+
 ## ✨ Key Features
 
 ### 🧹 **Advanced System Cleaning**
