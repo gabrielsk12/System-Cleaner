@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <!-- Common strings -->
+  <data name="AppTitle" xml:space="preserve">
+    <value>Windows System Cleaner Pro</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ano</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Ne</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Zrušit</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Použít</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Uložit</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Zavřít</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Chyba</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Varování</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Informace</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Úspěch</value>
+  </data>
+  
+  <!-- Main Window Tabs -->
+  <data name="Tab_SystemCleaner" xml:space="preserve">
+    <value>🧹 Čistič systému</value>
+  </data>
+  <data name="Tab_FileExplorer" xml:space="preserve">
+    <value>📂 Průzkumník souborů</value>
+  </data>
+  <data name="Tab_DriverUpdates" xml:space="preserve">
+    <value>🔧 Aktualizace ovladačů</value>
+  </data>
+  <data name="Tab_WindowsUpdates" xml:space="preserve">
+    <value>📥 Aktualizace Windows</value>
+  </data>
+  <data name="Tab_StartupPrograms" xml:space="preserve">
+    <value>🚀 Programy po spuštění</value>
+  </data>
+  <data name="Tab_Settings" xml:space="preserve">
+    <value>⚙️ Nastavení</value>
+  </data>
+  
+  <!-- System Cleaner Tab -->
+  <data name="SystemCleaner_Title" xml:space="preserve">
+    <value>Windows System Cleaner Pro</value>
+  </data>
+  <data name="SystemCleaner_Subtitle" xml:space="preserve">
+    <value>Vyčistěte systémové soubory a optimalizujte výkon Windows</value>
+  </data>
+  <data name="SystemCleaner_TotalToClean" xml:space="preserve">
+    <value>Celkem k vyčištění:</value>
+  </data>
+  <data name="SystemCleaner_SelectCategories" xml:space="preserve">
+    <value>Vyberte kategorie pro skenování a čištění:</value>
+  </data>
+  <data name="SystemCleaner_SelectAll" xml:space="preserve">
+    <value>Vybrat vše</value>
+  </data>
+  <data name="SystemCleaner_SelectNone" xml:space="preserve">
+    <value>Zrušit výběr</value>
+  </data>
+  <data name="SystemCleaner_ScanSystem" xml:space="preserve">
+    <value>🔍 Skenovat systém</value>
+  </data>
+  <data name="SystemCleaner_CleanSelectedFiles" xml:space="preserve">
+    <value>🧹 Vyčistit vybrané soubory</value>
+  </data>
+  <data name="SystemCleaner_CleaningFiles" xml:space="preserve">
+    <value>Čištění souborů...</value>
+  </data>
+  <data name="SystemCleaner_AdminPrivileges" xml:space="preserve">
+    <value>⚠️ Pro nejlepší výsledky jsou doporučena administrátorská práva</value>
+  </data>
+
+  <!-- Driver Updates Tab -->
+  <data name="DriverUpdates_Title" xml:space="preserve">
+    <value>Aktualizace ovladačů</value>
+  </data>
+  <data name="DriverUpdates_Subtitle" xml:space="preserve">
+    <value>Zkontrolujte a aktualizujte své systémové ovladače pro optimální výkon</value>
+  </data>
+  <data name="DriverUpdates_ScanForUpdates" xml:space="preserve">
+    <value>🔍 Vyhledat aktualizace</value>
+  </data>
+  <data name="DriverUpdates_UpdateAll" xml:space="preserve">
+    <value>⚡ Aktualizovat vše</value>
+  </data>
+  <data name="DriverUpdates_LastScanned" xml:space="preserve">
+    <value>Naposledy skenováno:</value>
+  </data>
+  <data name="DriverUpdates_DriversToUpdate" xml:space="preserve">
+    <value>Ovladače k aktualizaci:</value>
+  </data>
+  <data name="DriverUpdates_OutdatedDrivers" xml:space="preserve">
+    <value>Zastaralé ovladače</value>
+  </data>
+  <data name="DriverUpdates_UpToDateDrivers" xml:space="preserve">
+    <value>Aktuální ovladače</value>
+  </data>
+  
+  <!-- Windows Updates Tab -->
+  <data name="WindowsUpdates_Title" xml:space="preserve">
+    <value>Aktualizace Windows</value>
+  </data>
+  <data name="WindowsUpdates_Subtitle" xml:space="preserve">
+    <value>Kontrolujte a spravujte aktualizace Windows pro zabezpečení a optimalizaci systému</value>
+  </data>
+  <data name="WindowsUpdates_CheckForUpdates" xml:space="preserve">
+    <value>🔍 Vyhledat aktualizace</value>
+  </data>
+  <data name="WindowsUpdates_InstallUpdates" xml:space="preserve">
+    <value>📥 Nainstalovat aktualizace</value>
+  </data>
+  <data name="WindowsUpdates_WindowsVersion" xml:space="preserve">
+    <value>Verze Windows:</value>
+  </data>
+  <data name="WindowsUpdates_LastChecked" xml:space="preserve">
+    <value>Naposledy kontrolováno:</value>
+  </data>
+  <data name="WindowsUpdates_LastInstalled" xml:space="preserve">
+    <value>Naposledy nainstalováno:</value>
+  </data>
+  <data name="WindowsUpdates_RestartRequired" xml:space="preserve">
+    <value>Vyžadován restart</value>
+  </data>
+  <data name="WindowsUpdates_SecurityUpdates" xml:space="preserve">
+    <value>Bezpečnostní aktualizace</value>
+  </data>
+  <data name="WindowsUpdates_QualityUpdates" xml:space="preserve">
+    <value>Aktualizace kvality</value>
+  </data>
+  <data name="WindowsUpdates_FeatureUpdates" xml:space="preserve">
+    <value>Aktualizace funkcí</value>
+  </data>
+  
+  <!-- Startup Programs Tab -->
+  <data name="StartupPrograms_Title" xml:space="preserve">
+    <value>Programy po spuštění</value>
+  </data>
+  <data name="StartupPrograms_Subtitle" xml:space="preserve">
+    <value>Spravujte programy, které se spouštějí při startu systému Windows</value>
+  </data>
+  <data name="StartupPrograms_RefreshList" xml:space="preserve">
+    <value>🔄 Obnovit seznam</value>
+  </data>
+  <data name="StartupPrograms_EnableSelected" xml:space="preserve">
+    <value>Povolit vybrané</value>
+  </data>
+  <data name="StartupPrograms_DisableSelected" xml:space="preserve">
+    <value>Zakázat vybrané</value>
+  </data>
+  <data name="StartupPrograms_ShowDisabled" xml:space="preserve">
+    <value>Zobrazit zakázané programy</value>
+  </data>
+  <data name="StartupPrograms_Name" xml:space="preserve">
+    <value>Název</value>
+  </data>
+  <data name="StartupPrograms_Publisher" xml:space="preserve">
+    <value>Vydavatel</value>
+  </data>
+  <data name="StartupPrograms_Location" xml:space="preserve">
+    <value>Umístění</value>
+  </data>
+  <data name="StartupPrograms_Status" xml:space="preserve">
+    <value>Stav</value>
+  </data>
+  <data name="StartupPrograms_ImpactHigh" xml:space="preserve">
+    <value>Vysoký dopad</value>
+  </data>
+  <data name="StartupPrograms_ImpactMedium" xml:space="preserve">
+    <value>Střední dopad</value>
+  </data>
+  <data name="StartupPrograms_ImpactLow" xml:space="preserve">
+    <value>Nízký dopad</value>
+  </data>
+  <data name="StartupPrograms_Enabled" xml:space="preserve">
+    <value>Povoleno</value>
+  </data>
+  <data name="StartupPrograms_Disabled" xml:space="preserve">
+    <value>Zakázáno</value>
+  </data>
+  
+  <!-- Settings Tab -->
+  <data name="Settings_Title" xml:space="preserve">
+    <value>Nastavení</value>
+  </data>
+  <data name="Settings_Subtitle" xml:space="preserve">
+    <value>Přizpůsobte aplikaci podle svých preferencí</value>
+  </data>
+  <data name="Settings_General" xml:space="preserve">
+    <value>Obecné</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Jazyk</value>
+  </data>
+  <data name="Settings_Theme" xml:space="preserve">
+    <value>Motiv</value>
+  </data>
+  <data name="Settings_LightTheme" xml:space="preserve">
+    <value>Světlý</value>
+  </data>
+  <data name="Settings_DarkTheme" xml:space="preserve">
+    <value>Tmavý</value>
+  </data>
+  <data name="Settings_SystemTheme" xml:space="preserve">
+    <value>Systémový</value>
+  </data>
+  <data name="Settings_RunAtStartup" xml:space="preserve">
+    <value>Spustit při startu Windows</value>
+  </data>
+  <data name="Settings_CheckForUpdates" xml:space="preserve">
+    <value>Automaticky kontrolovat aktualizace</value>
+  </data>
+  <data name="Settings_SaveLogFiles" xml:space="preserve">
+    <value>Ukládat soubory protokolů</value>
+  </data>
+  <data name="Settings_Advanced" xml:space="preserve">
+    <value>Pokročilé</value>
+  </data>
+  <data name="Settings_ResetToDefaults" xml:space="preserve">
+    <value>Obnovit výchozí nastavení</value>
+  </data>
+  <data name="Settings_About" xml:space="preserve">
+    <value>O aplikaci</value>
+  </data>
+  <data name="Settings_Version" xml:space="preserve">
+    <value>Verze</value>
+  </data>
+  <data name="Settings_BuildDate" xml:space="preserve">
+    <value>Datum sestavení</value>
+  </data>
+  <data name="Settings_License" xml:space="preserve">
+    <value>Licence</value>
+  </data>
+  <data name="Settings_PrivacyPolicy" xml:space="preserve">
+    <value>Zásady ochrany osobních údajů</value>
+  </data>
+  <data name="Settings_Acknowledgements" xml:space="preserve">
+    <value>Poděkování</value>
+  </data>
+  
+  <!-- Crash Report Window -->
+  <data name="CrashReport_Title" xml:space="preserve">
+    <value>Windows Cleaner Pro - Hlášení o pádu</value>
+  </data>
+  <data name="CrashReport_Header" xml:space="preserve">
+    <value>Zjištěn pád aplikace</value>
+  </data>
+  <data name="CrashReport_Subtitle" xml:space="preserve">
+    <value>Windows Cleaner Pro narazil na neočekávanou chybu</value>
+  </data>
+  <data name="CrashReport_Details" xml:space="preserve">
+    <value>Podrobnosti o pádu:</value>
+  </data>
+  <data name="CrashReport_CrashID" xml:space="preserve">
+    <value>ID pádu:</value>
+  </data>
+  <data name="CrashReport_Timestamp" xml:space="preserve">
+    <value>Časové razítko:</value>
+  </data>
+  <data name="CrashReport_ErrorType" xml:space="preserve">
+    <value>Typ chyby:</value>
+  </data>
+  <data name="CrashReport_LogFile" xml:space="preserve">
+    <value>Soubor protokolu:</value>
+  </data>
+  <data name="CrashReport_ErrorDetails" xml:space="preserve">
+    <value>Podrobnosti o chybě a trasování zásobníku</value>
+  </data>
+  <data name="CrashReport_WhatToDo" xml:space="preserve">
+    <value>Co byste chtěli udělat?</value>
+  </data>
+  <data name="CrashReport_SendReport" xml:space="preserve">
+    <value>Odeslat hlášení vývojářům (pomáhá vylepšovat aplikaci)</value>
+  </data>
+  <data name="CrashReport_RestartApp" xml:space="preserve">
+    <value>Automaticky restartovat Windows Cleaner Pro</value>
+  </data>
+  <data name="CrashReport_PersonalDataNotice" xml:space="preserve">
+    <value>Vaše osobní údaje a soubory nejsou zahrnuty v hlášeních o pádech.</value>
+  </data>
+  <data name="CrashReport_ViewLogButton" xml:space="preserve">
+    <value>📄 Zobrazit soubor protokolu</value>
+  </data>
+  <data name="CrashReport_CopyDetailsButton" xml:space="preserve">
+    <value>📋 Kopírovat podrobnosti</value>
+  </data>
+  <data name="CrashReport_SendReportButton" xml:space="preserve">
+    <value>📧 Odeslat hlášení a zavřít</value>
+  </data>
+  <data name="CrashReport_CloseButton" xml:space="preserve">
+    <value>❌ Zavřít</value>
+  </data>
+</root>

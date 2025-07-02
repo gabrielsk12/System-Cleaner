@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <!-- Common UI Strings -->
+  <data name="AppTitle" xml:space="preserve">
+    <value>Windows 系统清理专业版</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>否</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>应用</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  
+  <!-- File Explorer Tab -->
+  <data name="FileExplorerTitle" xml:space="preserve">
+    <value>文件资源管理器</value>
+  </data>
+  <data name="FileExplorerDescription" xml:space="preserve">
+    <value>在您的系统上浏览和管理文件</value>
+  </data>
+  <data name="FileName" xml:space="preserve">
+    <value>文件名</value>
+  </data>
+  <data name="FileSize" xml:space="preserve">
+    <value>大小</value>
+  </data>
+  <data name="FileType" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="DateModified" xml:space="preserve">
+    <value>修改日期</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>位置</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>加载中...</value>
+  </data>
+  <data name="NoFilesFound" xml:space="preserve">
+    <value>未找到文件</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="Properties" xml:space="preserve">
+    <value>属性</value>
+  </data>
+  
+  <!-- System Cleaner Tab -->
+  <data name="SystemCleanerTitle" xml:space="preserve">
+    <value>系统清理</value>
+  </data>
+  <data name="SystemCleanerDescription" xml:space="preserve">
+    <value>清理系统文件并优化 Windows 性能</value>
+  </data>
+  <data name="ScanSystem" xml:space="preserve">
+    <value>扫描系统</value>
+  </data>
+  <data name="CleanSelected" xml:space="preserve">
+    <value>清理所选内容</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>全选</value>
+  </data>
+  <data name="SelectNone" xml:space="preserve">
+    <value>取消全选</value>
+  </data>
+  <data name="TotalToClean" xml:space="preserve">
+    <value>待清理总计：</value>
+  </data>
+  <data name="CleaningFiles" xml:space="preserve">
+    <value>正在清理文件...</value>
+  </data>
+  <data name="ScanningSystem" xml:space="preserve">
+    <value>正在扫描系统...</value>
+  </data>
+  <data name="ReadyToScan" xml:space="preserve">
+    <value>准备扫描</value>
+  </data>
+  <data name="AdminPrivilegesRecommended" xml:space="preserve">
+    <value>建议使用管理员权限以获得最佳结果</value>
+  </data>
+  <data name="FilesFound" xml:space="preserve">
+    <value>{0} 个文件</value>
+  </data>
+  
+  <!-- Driver Updates Tab -->
+  <data name="DriverUpdatesTitle" xml:space="preserve">
+    <value>驱动程序更新</value>
+  </data>
+  <data name="DriverUpdatesDescription" xml:space="preserve">
+    <value>检查和安装最新的设备驱动程序</value>
+  </data>
+  <data name="CheckDrivers" xml:space="preserve">
+    <value>检查驱动程序</value>
+  </data>
+  <data name="UpdateAllDrivers" xml:space="preserve">
+    <value>更新所有驱动程序</value>
+  </data>
+  <data name="UpdateDriver" xml:space="preserve">
+    <value>更新驱动程序</value>
+  </data>
+  <data name="DriverName" xml:space="preserve">
+    <value>驱动程序名称</value>
+  </data>
+  <data name="CurrentVersion" xml:space="preserve">
+    <value>当前版本</value>
+  </data>
+  <data name="LatestVersion" xml:space="preserve">
+    <value>最新版本</value>
+  </data>
+  <data name="DeviceType" xml:space="preserve">
+    <value>设备类型</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="UpToDate" xml:space="preserve">
+    <value>已是最新</value>
+  </data>
+  <data name="UpdateAvailable" xml:space="preserve">
+    <value>有可用更新</value>
+  </data>
+  <data name="CheckingDrivers" xml:space="preserve">
+    <value>正在检查驱动程序...</value>
+  </data>
+  <data name="LastChecked" xml:space="preserve">
+    <value>上次检查：</value>
+  </data>
+  <data name="NoDriverUpdatesFound" xml:space="preserve">
+    <value>未找到驱动程序更新</value>
+  </data>
+  <data name="DriverUpdatesFound" xml:space="preserve">
+    <value>找到 {0} 个驱动程序更新</value>
+  </data>
+  
+  <!-- Windows Updates Tab -->
+  <data name="WindowsUpdatesTitle" xml:space="preserve">
+    <value>Windows 更新</value>
+  </data>
+  <data name="WindowsUpdatesDescription" xml:space="preserve">
+    <value>检查和安装最新的 Windows 更新</value>
+  </data>
+  <data name="CheckUpdates" xml:space="preserve">
+    <value>检查更新</value>
+  </data>
+  <data name="InstallUpdates" xml:space="preserve">
+    <value>安装更新</value>
+  </data>
+  <data name="UpdateTitle" xml:space="preserve">
+    <value>更新标题</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>大小</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>类别</value>
+  </data>
+  <data name="Importance" xml:space="preserve">
+    <value>重要性</value>
+  </data>
+  <data name="InstallUpdate" xml:space="preserve">
+    <value>安装更新</value>
+  </data>
+  <data name="Critical" xml:space="preserve">
+    <value>关键</value>
+  </data>
+  <data name="Important" xml:space="preserve">
+    <value>重要</value>
+  </data>
+  <data name="Optional" xml:space="preserve">
+    <value>可选</value>
+  </data>
+  <data name="SecurityUpdate" xml:space="preserve">
+    <value>安全更新</value>
+  </data>
+  <data name="FeatureUpdate" xml:space="preserve">
+    <value>功能更新</value>
+  </data>
+  <data name="CheckingForUpdates" xml:space="preserve">
+    <value>正在检查更新...</value>
+  </data>
+  <data name="InstallingUpdates" xml:space="preserve">
+    <value>正在安装更新...</value>
+  </data>
+  <data name="WindowsVersion" xml:space="preserve">
+    <value>Windows 版本：</value>
+  </data>
+  <data name="NoUpdatesFound" xml:space="preserve">
+    <value>未找到更新</value>
+  </data>
+  <data name="UpdatesFound" xml:space="preserve">
+    <value>找到 {0} 个更新</value>
+  </data>
+  <data name="RestartRequired" xml:space="preserve">
+    <value>需要重新启动才能完成更新</value>
+  </data>
+  <data name="AutoUpdateEnabled" xml:space="preserve">
+    <value>已启用自动更新</value>
+  </data>
+  
+  <!-- Startup Programs Tab -->
+  <data name="StartupProgramsTitle" xml:space="preserve">
+    <value>启动程序</value>
+  </data>
+  <data name="StartupProgramsDescription" xml:space="preserve">
+    <value>管理随 Windows 自动启动的程序以提高启动速度</value>
+  </data>
+  <data name="OptimizeStartup" xml:space="preserve">
+    <value>优化启动</value>
+  </data>
+  <data name="StartupPerformanceImpact" xml:space="preserve">
+    <value>启动性能影响</value>
+  </data>
+  <data name="TotalPrograms" xml:space="preserve">
+    <value>总程序数：</value>
+  </data>
+  <data name="HighImpact" xml:space="preserve">
+    <value>高影响</value>
+  </data>
+  <data name="MediumImpact" xml:space="preserve">
+    <value>中等影响</value>
+  </data>
+  <data name="LowImpact" xml:space="preserve">
+    <value>低影响</value>
+  </data>
+  <data name="Enabled" xml:space="preserve">
+    <value>已启用</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>已禁用</value>
+  </data>
+  <data name="Publisher" xml:space="preserve">
+    <value>发布者</value>
+  </data>
+  <data name="StartupType" xml:space="preserve">
+    <value>启动类型</value>
+  </data>
+  <data name="StartupImpact" xml:space="preserve">
+    <value>启动影响</value>
+  </data>
+  <data name="DisableSelected" xml:space="preserve">
+    <value>禁用所选项</value>
+  </data>
+  <data name="EnableSelected" xml:space="preserve">
+    <value>启用所选项</value>
+  </data>
+  <data name="AnalyzingStartupPrograms" xml:space="preserve">
+    <value>正在分析启动程序...</value>
+  </data>
+  <data name="ShowDetails" xml:space="preserve">
+    <value>显示详情</value>
+  </data>
+  <data name="HideDetails" xml:space="preserve">
+    <value>隐藏详情</value>
+  </data>
+  <data name="Registry" xml:space="preserve">
+    <value>注册表</value>
+  </data>
+  <data name="StartupFolder" xml:space="preserve">
+    <value>启动文件夹</value>
+  </data>
+  <data name="TaskScheduler" xml:space="preserve">
+    <value>任务计划程序</value>
+  </data>
+  
+  <!-- Settings Tab -->
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="SettingsDescription" xml:space="preserve">
+    <value>配置应用程序设置和首选项</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>常规</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>外观</value>
+  </data>
+  <data name="Advanced" xml:space="preserve">
+    <value>高级</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="DarkMode" xml:space="preserve">
+    <value>深色模式</value>
+  </data>
+  <data name="LightMode" xml:space="preserve">
+    <value>浅色模式</value>
+  </data>
+  <data name="SystemDefault" xml:space="preserve">
+    <value>系统默认</value>
+  </data>
+  <data name="RunAtStartup" xml:space="preserve">
+    <value>开机时启动程序</value>
+  </data>
+  <data name="MinimizeToTray" xml:space="preserve">
+    <value>最小化到系统托盘</value>
+  </data>
+  <data name="CheckForUpdatesAutomatically" xml:space="preserve">
+    <value>自动检查更新</value>
+  </data>
+  <data name="SendAnonymousUsageData" xml:space="preserve">
+    <value>发送匿名使用数据</value>
+  </data>
+  <data name="EnableAnimations" xml:space="preserve">
+    <value>启用动画效果</value>
+  </data>
+  <data name="AutoScanOnStartup" xml:space="preserve">
+    <value>启动时自动扫描</value>
+  </data>
+  <data name="AutoCleanupThreshold" xml:space="preserve">
+    <value>自动清理阈值 (MB)</value>
+  </data>
+  <data name="LogLevel" xml:space="preserve">
+    <value>日志级别</value>
+  </data>
+  <data name="Debug" xml:space="preserve">
+    <value>调试</value>
+  </data>
+  <data name="Verbose" xml:space="preserve">
+    <value>详细</value>
+  </data>
+  <data name="Normal" xml:space="preserve">
+    <value>正常</value>
+  </data>
+  <data name="Minimal" xml:space="preserve">
+    <value>最小</value>
+  </data>
+  <data name="AutoCheckDriverUpdates" xml:space="preserve">
+    <value>自动检查驱动程序更新</value>
+  </data>
+  <data name="AutoCheckWindowsUpdates" xml:space="preserve">
+    <value>自动检查 Windows 更新</value>
+  </data>
+  <data name="SettingsSaved" xml:space="preserve">
+    <value>设置已保存</value>
+  </data>
+  <data name="RestartRequired" xml:space="preserve">
+    <value>需要重新启动应用程序以应用更改</value>
+  </data>
+  
+  <!-- Crash Report -->
+  <data name="CrashReportTitle" xml:space="preserve">
+    <value>崩溃报告</value>
+  </data>
+  <data name="CrashReportDescription" xml:space="preserve">
+    <value>应用程序遇到了一个问题</value>
+  </data>
+  <data name="CrashReportMessage" xml:space="preserve">
+    <value>Windows 系统清理专业版遇到了一个问题，需要关闭。我们对此带来的不便表示歉意。</value>
+  </data>
+  <data name="ErrorDetails" xml:space="preserve">
+    <value>错误详情</value>
+  </data>
+  <data name="RestartApp" xml:space="preserve">
+    <value>重启应用程序</value>
+  </data>
+  <data name="SendReport" xml:space="preserve">
+    <value>发送报告</value>
+  </data>
+  
+  <!-- Languages -->
+  <data name="English" xml:space="preserve">
+    <value>英语</value>
+  </data>
+  <data name="German" xml:space="preserve">
+    <value>德语</value>
+  </data>
+  <data name="Slovak" xml:space="preserve">
+    <value>斯洛伐克语</value>
+  </data>
+  <data name="Czech" xml:space="preserve">
+    <value>捷克语</value>
+  </data>
+  <data name="Russian" xml:space="preserve">
+    <value>俄语</value>
+  </data>
+  <data name="Korean" xml:space="preserve">
+    <value>韩语</value>
+  </data>
+  <data name="Japanese" xml:space="preserve">
+    <value>日语</value>
+  </data>
+  <data name="Chinese" xml:space="preserve">
+    <value>中文</value>
+  </data>
+</root>

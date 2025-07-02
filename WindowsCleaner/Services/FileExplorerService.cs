@@ -1,30 +1,79 @@
 using System.IO;
+using System.Threading;
+using System.Collections.Concurrent;
 using WindowsCleaner.Models;
 
 namespace WindowsCleaner.Services
 {
     public class FileExplorerService
     {
+        private readonly SemaphoreSlim _semaphore;
+        private readonly ConcurrentDictionary<string, long> _sizeCache;
+
+        public FileExplorerService()
+        {
+            _semaphore = new SemaphoreSlim(Environment.ProcessorCount, Environment.ProcessorCount);
+            _sizeCache = new ConcurrentDictionary<string, long>();
+        }
+
         public async Task<List<FileSystemItem>> GetDrivesAsync()
         {
-            return await Task.Run(() =>
+            return await Task.Run(async () =>
             {
                 var drives = new List<FileSystemItem>();
                 
-                foreach (var drive in DriveInfo.GetDrives())
+                try
                 {
-                    if (drive.IsReady)
-                    {
-                        var driveItem = new FileSystemItem
-                        {
-                            Name = $"{drive.Name} ({drive.DriveType})",
-                            FullPath = drive.Name,
-                            ItemType = FileSystemItemType.Drive,
-                            Size = drive.TotalSize - drive.AvailableFreeSpace
-                        };
+                    System.Diagnostics.Debug.WriteLine("Starting drive enumeration");
 
-                        drives.Add(driveItem);
-                    }
+                    var driveTasks = DriveInfo.GetDrives()
+                        .Where(drive => drive.IsReady)
+                        .Select(async drive =>
+                        {
+                            try
+                            {
+                                await _semaphore.WaitAsync();
+                                
+                                var usedSpace = await Task.Run(() =>
+                                {
+                                    try
+                                    {
+                                        return drive.TotalSize - drive.AvailableFreeSpace;
+                                    }
+                                    catch
+                                    {
+                                        return 0L;
+                                    }
+                                });
+
+                                return new FileSystemItem
+                                {
+                                    Name = $"{drive.Name} ({drive.DriveType})",
+                                    FullPath = drive.Name,
+                                    ItemType = FileSystemItemType.Drive,
+                                    Size = usedSpace,
+                                    LastModified = DateTime.Now
+                                };
+                            }
+                            catch (Exception ex)
+                            {
+                                System.Diagnostics.Debug.WriteLine($"Failed to process drive {drive.Name}: {ex.Message}");
+                                return null;
+                            }
+                            finally
+                            {
+                                _semaphore.Release();
+                            }
+                        });
+
+                    var results = await Task.WhenAll(driveTasks);
+                    drives.AddRange(results.Where(d => d != null)!);
+
+                    System.Diagnostics.Debug.WriteLine($"Found {drives.Count} drives");
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Failed to enumerate drives: {ex.Message}");
                 }
 
                 return drives;
@@ -33,60 +82,63 @@ namespace WindowsCleaner.Services
 
         public async Task<List<FileSystemItem>> GetDirectoryContentsAsync(string path, bool includeFiles = true)
         {
-            return await Task.Run(() =>
+            return await Task.Run(async () =>
             {
                 var items = new List<FileSystemItem>();
 
                 try
                 {
+                    if (!Directory.Exists(path))
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Directory does not exist: {path}");
+                        return items;
+                    }
+
                     var directoryInfo = new DirectoryInfo(path);
+                    var tasks = new List<Task<FileSystemItem?>>();
                     
-                    // Add subdirectories
-                    foreach (var dir in directoryInfo.GetDirectories())
+                    // Process subdirectories with parallel execution
+                    try
+                    {
+                        var directories = directoryInfo.GetDirectories();
+                        foreach (var dir in directories)
+                        {
+                            tasks.Add(ProcessDirectoryAsync(dir));
+                        }
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Access denied to directory: {path}");
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Error getting directories in {path}: {ex.Message}");
+                    }
+
+                    // Process files if requested
+                    if (includeFiles)
                     {
                         try
                         {
-                            var size = CalculateDirectorySize(dir.FullName);
-                            var item = new FileSystemItem
+                            var files = directoryInfo.GetFiles();
+                            foreach (var file in files)
                             {
-                                Name = dir.Name,
-                                FullPath = dir.FullName,
-                                ItemType = FileSystemItemType.Folder,
-                                LastModified = dir.LastWriteTime,
-                                Size = size
-                            };
-                            items.Add(item);
+                                tasks.Add(ProcessFileAsync(file));
+                            }
                         }
-                        catch
+                        catch (UnauthorizedAccessException)
                         {
-                            // Skip directories we can't access
+                            System.Diagnostics.Debug.WriteLine($"Access denied to files in: {path}");
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"Error getting files in {path}: {ex.Message}");
                         }
                     }
 
-                    // Add files if requested
-                    if (includeFiles)
-                    {
-                        foreach (var file in directoryInfo.GetFiles())
-                        {
-                            try
-                            {
-                                var item = new FileSystemItem
-                                {
-                                    Name = file.Name,
-                                    FullPath = file.FullName,
-                                    ItemType = FileSystemItemType.File,
-                                    LastModified = file.LastWriteTime,
-                                    Size = file.Length,
-                                    Extension = file.Extension
-                                };
-                                items.Add(item);
-                            }
-                            catch
-                            {
-                                // Skip files we can't access
-                            }
-                        }
-                    }
+                    // Wait for all tasks to complete
+                    var results = await Task.WhenAll(tasks);
+                    items.AddRange(results.Where(item => item != null)!);
 
                     // Calculate size percentages
                     var totalSize = items.Sum(i => i.Size);
@@ -101,11 +153,124 @@ namespace WindowsCleaner.Services
                     // Sort by size descending
                     return items.OrderByDescending(i => i.Size).ToList();
                 }
-                catch
+                catch (Exception ex)
                 {
+                    System.Diagnostics.Debug.WriteLine($"Failed to get directory contents for {path}: {ex.Message}");
                     return new List<FileSystemItem>();
                 }
             });
+        }
+
+        private async Task<FileSystemItem?> ProcessDirectoryAsync(DirectoryInfo dir)
+        {
+            try
+            {
+                await _semaphore.WaitAsync();
+
+                var size = await CalculateDirectorySizeAsync(dir.FullName);
+                return new FileSystemItem
+                {
+                    Name = dir.Name,
+                    FullPath = dir.FullName,
+                    ItemType = FileSystemItemType.Folder,
+                    LastModified = dir.LastWriteTime,
+                    Size = size
+                };
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to process directory {dir.Name}: {ex.Message}");
+                return null;
+            }
+            finally
+            {
+                _semaphore.Release();
+            }
+        }
+
+        private async Task<FileSystemItem?> ProcessFileAsync(FileInfo file)
+        {
+            try
+            {
+                return await Task.Run(() =>
+                {
+                    return new FileSystemItem
+                    {
+                        Name = file.Name,
+                        FullPath = file.FullName,
+                        ItemType = FileSystemItemType.File,
+                        LastModified = file.LastWriteTime,
+                        Size = file.Length,
+                        Extension = file.Extension
+                    };
+                });
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Failed to process file {file.Name}: {ex.Message}");
+                return null;
+            }
+        }
+
+        private async Task<long> CalculateDirectorySizeAsync(string directoryPath)
+        {
+            // Check cache first
+            if (_sizeCache.TryGetValue(directoryPath, out long cachedSize))
+            {
+                return cachedSize;
+            }
+
+            try
+            {
+                var size = await Task.Run(() =>
+                {
+                    try
+                    {
+                        var directory = new DirectoryInfo(directoryPath);
+                        return directory.EnumerateFiles("*", SearchOption.AllDirectories)
+                            .Where(file => !IsSystemFile(file))
+                            .Sum(file => 
+                            {
+                                try 
+                                { 
+                                    return file.Length; 
+                                } 
+                                catch 
+                                { 
+                                    return 0L; 
+                                }
+                            });
+                    }
+                    catch
+                    {
+                        return 0L;
+                    }
+                });
+
+                // Cache the result
+                _sizeCache.TryAdd(directoryPath, size);
+                return size;
+            }
+            catch
+            {
+                return 0L;
+            }
+        }
+
+        private bool IsSystemFile(FileInfo file)
+        {
+            try
+            {
+                return file.Attributes.HasFlag(FileAttributes.System) ||
+                       file.Attributes.HasFlag(FileAttributes.Hidden) ||
+                       file.Name.StartsWith("$") ||
+                       file.Name.Equals("desktop.ini", StringComparison.OrdinalIgnoreCase) ||
+                       file.Name.Equals("thumbs.db", StringComparison.OrdinalIgnoreCase);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public async Task<List<FileSystemItem>> FindLargestFoldersAsync(string rootPath, int maxResults = 20)

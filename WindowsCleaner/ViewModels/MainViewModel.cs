@@ -1,11 +1,20 @@
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using WindowsCleaner.Models;
 using WindowsCleaner.Services;
+using WindowsCleaner.ViewModels;
 
 namespace WindowsCleaner.ViewModels
 {
+    // Forward declarations to avoid circular dependencies
+    public partial class DriverUpdatesViewModel { }
+    public partial class WindowsUpdatesViewModel { }
+    public partial class StartupProgramsViewModel { }
+
     public class MainViewModel : BaseViewModel
     {
         private readonly CleanerService _cleanerService;
@@ -25,6 +34,9 @@ namespace WindowsCleaner.ViewModels
             
             // Initialize view models for tabs
             FileExplorerViewModel = new FileExplorerViewModel();
+            DriverUpdatesViewModel = new DriverUpdatesViewModel();
+            WindowsUpdatesViewModel = new WindowsUpdatesViewModel();
+            StartupProgramsViewModel = new StartupProgramsViewModel();
             SettingsViewModel = new SettingsViewModel(_settingsService);
             
             InitializeCategories();
@@ -37,6 +49,9 @@ namespace WindowsCleaner.ViewModels
 
         public ObservableCollection<CleanupCategory> CleanupCategories { get; }
         public FileExplorerViewModel FileExplorerViewModel { get; }
+        public DriverUpdatesViewModel DriverUpdatesViewModel { get; }
+        public WindowsUpdatesViewModel WindowsUpdatesViewModel { get; }
+        public StartupProgramsViewModel StartupProgramsViewModel { get; }
         public SettingsViewModel SettingsViewModel { get; }
 
         public bool IsScanning

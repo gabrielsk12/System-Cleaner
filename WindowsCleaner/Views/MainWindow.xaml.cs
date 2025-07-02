@@ -1,8 +1,12 @@
 using System.Windows;
+using System.Windows.Controls;
 using WindowsCleaner.ViewModels;
 
 namespace WindowsCleaner.Views
 {
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -16,16 +20,37 @@ namespace WindowsCleaner.Views
             if (DataContext is MainViewModel mainViewModel)
             {
                 // Find tab content controls and set their data contexts
-                var fileExplorerTab = FindName("FileExplorerView") as Views.FileExplorerView;
+                var fileExplorerTab = FindName("FileExplorerView");
                 if (fileExplorerTab != null)
                 {
-                    fileExplorerTab.DataContext = mainViewModel.FileExplorerViewModel;
+                    SetDataContext(fileExplorerTab, mainViewModel.FileExplorerViewModel);
                 }
 
-                var settingsTab = FindName("SettingsView") as Views.SettingsView;
+                // Set data context on the embedded view directly through the visual tree
+                var driverUpdatesTab = this.FindName("DriverUpdatesView");
+                if (driverUpdatesTab != null)
+                {
+                    SetDataContext(driverUpdatesTab, mainViewModel.DriverUpdatesViewModel);
+                }
+
+                // Set data context on the embedded view directly through the visual tree
+                var windowsUpdatesTab = this.FindName("WindowsUpdatesView");
+                if (windowsUpdatesTab != null)
+                {
+                    SetDataContext(windowsUpdatesTab, mainViewModel.WindowsUpdatesViewModel);
+                }
+
+                // Set data context on the embedded view directly through the visual tree
+                var startupProgramsTab = this.FindName("StartupProgramsView");
+                if (startupProgramsTab != null)
+                {
+                    SetDataContext(startupProgramsTab, mainViewModel.StartupProgramsViewModel);
+                }
+
+                var settingsTab = FindName("SettingsView");
                 if (settingsTab != null)
                 {
-                    settingsTab.DataContext = mainViewModel.SettingsViewModel;
+                    SetDataContext(settingsTab, mainViewModel.SettingsViewModel);
                 }
             }
 
@@ -73,6 +98,15 @@ namespace WindowsCleaner.Views
             {
                 MessageBox.Show($"Failed to restart as administrator: {ex.Message}", "Error", 
                     MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        // Helper method to set data context on a control
+        private void SetDataContext(object control, object viewModel)
+        {
+            if (control is FrameworkElement element)
+            {
+                element.DataContext = viewModel;
             }
         }
     }

@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <!-- Common strings -->
+  <data name="AppTitle" xml:space="preserve">
+    <value>Windows System Cleaner Pro</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>예</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>아니오</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>확인</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>취소</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>적용</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>저장</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>닫기</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>오류</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>경고</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>정보</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>성공</value>
+  </data>
+  
+  <!-- Main Window Tabs -->
+  <data name="Tab_SystemCleaner" xml:space="preserve">
+    <value>🧹 시스템 청소</value>
+  </data>
+  <data name="Tab_FileExplorer" xml:space="preserve">
+    <value>📂 파일 탐색기</value>
+  </data>
+  <data name="Tab_DriverUpdates" xml:space="preserve">
+    <value>🔧 드라이버 업데이트</value>
+  </data>
+  <data name="Tab_WindowsUpdates" xml:space="preserve">
+    <value>📥 윈도우 업데이트</value>
+  </data>
+  <data name="Tab_StartupPrograms" xml:space="preserve">
+    <value>🚀 시작 프로그램</value>
+  </data>
+  <data name="Tab_Settings" xml:space="preserve">
+    <value>⚙️ 설정</value>
+  </data>
+  
+  <!-- System Cleaner Tab -->
+  <data name="SystemCleaner_Title" xml:space="preserve">
+    <value>Windows System Cleaner Pro</value>
+  </data>
+  <data name="SystemCleaner_Subtitle" xml:space="preserve">
+    <value>시스템 파일을 정리하고 Windows 성능을 최적화하세요</value>
+  </data>
+  <data name="SystemCleaner_TotalToClean" xml:space="preserve">
+    <value>정리할 총량:</value>
+  </data>
+  <data name="SystemCleaner_SelectCategories" xml:space="preserve">
+    <value>스캔 및 정리할 카테고리 선택:</value>
+  </data>
+  <data name="SystemCleaner_SelectAll" xml:space="preserve">
+    <value>모두 선택</value>
+  </data>
+  <data name="SystemCleaner_SelectNone" xml:space="preserve">
+    <value>선택 취소</value>
+  </data>
+  <data name="SystemCleaner_ScanSystem" xml:space="preserve">
+    <value>🔍 시스템 스캔</value>
+  </data>
+  <data name="SystemCleaner_CleanSelectedFiles" xml:space="preserve">
+    <value>🧹 선택한 파일 정리</value>
+  </data>
+  <data name="SystemCleaner_CleaningFiles" xml:space="preserve">
+    <value>파일 정리 중...</value>
+  </data>
+  <data name="SystemCleaner_AdminPrivileges" xml:space="preserve">
+    <value>⚠️ 최상의 결과를 위해 관리자 권한 권장</value>
+  </data>
+
+  <!-- Driver Updates Tab -->
+  <data name="DriverUpdates_Title" xml:space="preserve">
+    <value>드라이버 업데이트</value>
+  </data>
+  <data name="DriverUpdates_Subtitle" xml:space="preserve">
+    <value>최적의 성능을 위해 시스템 드라이버를 확인하고 업데이트하세요</value>
+  </data>
+  <data name="DriverUpdates_ScanForUpdates" xml:space="preserve">
+    <value>🔍 업데이트 스캔</value>
+  </data>
+  <data name="DriverUpdates_UpdateAll" xml:space="preserve">
+    <value>⚡ 모두 업데이트</value>
+  </data>
+  <data name="DriverUpdates_LastScanned" xml:space="preserve">
+    <value>마지막 스캔:</value>
+  </data>
+  <data name="DriverUpdates_DriversToUpdate" xml:space="preserve">
+    <value>업데이트할 드라이버:</value>
+  </data>
+  <data name="DriverUpdates_OutdatedDrivers" xml:space="preserve">
+    <value>오래된 드라이버</value>
+  </data>
+  <data name="DriverUpdates_UpToDateDrivers" xml:space="preserve">
+    <value>최신 드라이버</value>
+  </data>
+  
+  <!-- Windows Updates Tab -->
+  <data name="WindowsUpdates_Title" xml:space="preserve">
+    <value>윈도우 업데이트</value>
+  </data>
+  <data name="WindowsUpdates_Subtitle" xml:space="preserve">
+    <value>시스템 보안 및 최적화를 위해 윈도우 업데이트를 확인하고 관리하세요</value>
+  </data>
+  <data name="WindowsUpdates_CheckForUpdates" xml:space="preserve">
+    <value>🔍 업데이트 확인</value>
+  </data>
+  <data name="WindowsUpdates_InstallUpdates" xml:space="preserve">
+    <value>📥 업데이트 설치</value>
+  </data>
+  <data name="WindowsUpdates_WindowsVersion" xml:space="preserve">
+    <value>윈도우 버전:</value>
+  </data>
+  <data name="WindowsUpdates_LastChecked" xml:space="preserve">
+    <value>마지막 확인:</value>
+  </data>
+  <data name="WindowsUpdates_LastInstalled" xml:space="preserve">
+    <value>마지막 설치:</value>
+  </data>
+  <data name="WindowsUpdates_RestartRequired" xml:space="preserve">
+    <value>재시작 필요</value>
+  </data>
+  <data name="WindowsUpdates_SecurityUpdates" xml:space="preserve">
+    <value>보안 업데이트</value>
+  </data>
+  <data name="WindowsUpdates_QualityUpdates" xml:space="preserve">
+    <value>품질 업데이트</value>
+  </data>
+  <data name="WindowsUpdates_FeatureUpdates" xml:space="preserve">
+    <value>기능 업데이트</value>
+  </data>
+  
+  <!-- Startup Programs Tab -->
+  <data name="StartupPrograms_Title" xml:space="preserve">
+    <value>시작 프로그램</value>
+  </data>
+  <data name="StartupPrograms_Subtitle" xml:space="preserve">
+    <value>윈도우 시작 시 실행되는 프로그램 관리</value>
+  </data>
+  <data name="StartupPrograms_RefreshList" xml:space="preserve">
+    <value>🔄 목록 새로고침</value>
+  </data>
+  <data name="StartupPrograms_EnableSelected" xml:space="preserve">
+    <value>선택 항목 활성화</value>
+  </data>
+  <data name="StartupPrograms_DisableSelected" xml:space="preserve">
+    <value>선택 항목 비활성화</value>
+  </data>
+  <data name="StartupPrograms_ShowDisabled" xml:space="preserve">
+    <value>비활성화된 프로그램 표시</value>
+  </data>
+  <data name="StartupPrograms_Name" xml:space="preserve">
+    <value>이름</value>
+  </data>
+  <data name="StartupPrograms_Publisher" xml:space="preserve">
+    <value>게시자</value>
+  </data>
+  <data name="StartupPrograms_Location" xml:space="preserve">
+    <value>위치</value>
+  </data>
+  <data name="StartupPrograms_Status" xml:space="preserve">
+    <value>상태</value>
+  </data>
+  <data name="StartupPrograms_ImpactHigh" xml:space="preserve">
+    <value>높은 영향</value>
+  </data>
+  <data name="StartupPrograms_ImpactMedium" xml:space="preserve">
+    <value>중간 영향</value>
+  </data>
+  <data name="StartupPrograms_ImpactLow" xml:space="preserve">
+    <value>낮은 영향</value>
+  </data>
+  <data name="StartupPrograms_Enabled" xml:space="preserve">
+    <value>활성화됨</value>
+  </data>
+  <data name="StartupPrograms_Disabled" xml:space="preserve">
+    <value>비활성화됨</value>
+  </data>
+  
+  <!-- Settings Tab -->
+  <data name="Settings_Title" xml:space="preserve">
+    <value>설정</value>
+  </data>
+  <data name="Settings_Subtitle" xml:space="preserve">
+    <value>선호에 맞게 애플리케이션을 사용자 지정하세요</value>
+  </data>
+  <data name="Settings_General" xml:space="preserve">
+    <value>일반</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>언어</value>
+  </data>
+  <data name="Settings_Theme" xml:space="preserve">
+    <value>테마</value>
+  </data>
+  <data name="Settings_LightTheme" xml:space="preserve">
+    <value>밝은 테마</value>
+  </data>
+  <data name="Settings_DarkTheme" xml:space="preserve">
+    <value>어두운 테마</value>
+  </data>
+  <data name="Settings_SystemTheme" xml:space="preserve">
+    <value>시스템 테마</value>
+  </data>
+  <data name="Settings_RunAtStartup" xml:space="preserve">
+    <value>윈도우 시작 시 실행</value>
+  </data>
+  <data name="Settings_CheckForUpdates" xml:space="preserve">
+    <value>자동으로 업데이트 확인</value>
+  </data>
+  <data name="Settings_SaveLogFiles" xml:space="preserve">
+    <value>로그 파일 저장</value>
+  </data>
+  <data name="Settings_Advanced" xml:space="preserve">
+    <value>고급</value>
+  </data>
+  <data name="Settings_ResetToDefaults" xml:space="preserve">
+    <value>기본 설정으로 재설정</value>
+  </data>
+  <data name="Settings_About" xml:space="preserve">
+    <value>정보</value>
+  </data>
+  <data name="Settings_Version" xml:space="preserve">
+    <value>버전</value>
+  </data>
+  <data name="Settings_BuildDate" xml:space="preserve">
+    <value>빌드 날짜</value>
+  </data>
+  <data name="Settings_License" xml:space="preserve">
+    <value>라이선스</value>
+  </data>
+  <data name="Settings_PrivacyPolicy" xml:space="preserve">
+    <value>개인정보 보호정책</value>
+  </data>
+  <data name="Settings_Acknowledgements" xml:space="preserve">
+    <value>감사의 말</value>
+  </data>
+  
+  <!-- Crash Report Window -->
+  <data name="CrashReport_Title" xml:space="preserve">
+    <value>Windows Cleaner Pro - 충돌 보고서</value>
+  </data>
+  <data name="CrashReport_Header" xml:space="preserve">
+    <value>애플리케이션 충돌 감지됨</value>
+  </data>
+  <data name="CrashReport_Subtitle" xml:space="preserve">
+    <value>Windows Cleaner Pro에 예기치 않은 오류가 발생했습니다</value>
+  </data>
+  <data name="CrashReport_Details" xml:space="preserve">
+    <value>충돌 세부 정보:</value>
+  </data>
+  <data name="CrashReport_CrashID" xml:space="preserve">
+    <value>충돌 ID:</value>
+  </data>
+  <data name="CrashReport_Timestamp" xml:space="preserve">
+    <value>타임스탬프:</value>
+  </data>
+  <data name="CrashReport_ErrorType" xml:space="preserve">
+    <value>오류 유형:</value>
+  </data>
+  <data name="CrashReport_LogFile" xml:space="preserve">
+    <value>로그 파일:</value>
+  </data>
+  <data name="CrashReport_ErrorDetails" xml:space="preserve">
+    <value>오류 메시지 및 스택 추적</value>
+  </data>
+  <data name="CrashReport_WhatToDo" xml:space="preserve">
+    <value>어떻게 하시겠습니까?</value>
+  </data>
+  <data name="CrashReport_SendReport" xml:space="preserve">
+    <value>개발자에게 충돌 보고서 전송 (애플리케이션 개선 지원)</value>
+  </data>
+  <data name="CrashReport_RestartApp" xml:space="preserve">
+    <value>Windows Cleaner Pro 자동 재시작</value>
+  </data>
+  <data name="CrashReport_PersonalDataNotice" xml:space="preserve">
+    <value>개인 데이터와 파일은 충돌 보고서에 포함되지 않습니다.</value>
+  </data>
+  <data name="CrashReport_ViewLogButton" xml:space="preserve">
+    <value>📄 로그 파일 보기</value>
+  </data>
+  <data name="CrashReport_CopyDetailsButton" xml:space="preserve">
+    <value>📋 세부 정보 복사</value>
+  </data>
+  <data name="CrashReport_SendReportButton" xml:space="preserve">
+    <value>📧 보고서 전송 및 닫기</value>
+  </data>
+  <data name="CrashReport_CloseButton" xml:space="preserve">
+    <value>❌ 닫기</value>
+  </data>
+</root>

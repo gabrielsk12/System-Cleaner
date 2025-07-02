@@ -249,6 +249,21 @@
                 <views:FileExplorerView/>
             </TabItem>
 
+            <!-- Driver Updates Tab -->
+            <TabItem Header="🔧 Driver Updates" FontSize="14" Padding="16,8">
+                <views:DriverUpdatesView/>
+            </TabItem>
+
+            <!-- Windows Updates Tab -->
+            <TabItem Header="📥 Windows Updates" FontSize="14" Padding="16,8">
+                <views:WindowsUpdatesView/>
+            </TabItem>
+            
+            <!-- Startup Programs Tab -->
+            <TabItem Header="🚀 Startup Programs" FontSize="14" Padding="16,8">
+                <views:StartupProgramsView/>
+            </TabItem>
+
             <!-- Settings Tab -->
             <TabItem Header="⚙️ Settings" FontSize="14" Padding="16,8">
                 <views:SettingsView/>

@@ -115,4 +115,20 @@ namespace WindowsCleaner.Models
         public long TotalSize { get; set; }
         public List<string> Errors { get; set; } = new();
     }
+
+    /// <summary>
+    /// Crash information for error handling and reporting
+    /// </summary>
+    public class CrashInfo
+    {
+        public string CrashId { get; set; } = "";
+        public DateTime Timestamp { get; set; }
+        public string ExceptionType { get; set; } = "";
+        public string Message { get; set; } = "";
+        public string StackTrace { get; set; } = "";
+        public string AdditionalInfo { get; set; } = "";
+        public string ApplicationVersion { get; set; } = "";
+        public string OperatingSystem { get; set; } = "";
+        public bool IsReported { get; set; }
+    }
 }

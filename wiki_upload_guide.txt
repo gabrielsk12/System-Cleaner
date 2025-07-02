@@ -1,0 +1,42 @@
+=== WIKI UPLOAD GUIDE ===
+
+Your wiki content is ready! Follow these steps:
+
+1. Go to: https://github.com/gabrielsk12/System-Cleaner
+2. Click the "Wiki" tab
+3. Click "Create the first page" (if first time)
+
+PAGE CREATION ORDER:
+====================
+
+1. HOME PAGE (Create this first!)
+   Title: Home
+   File: wiki/Home.md
+   
+2. INSTALLATION GUIDE
+   Title: Installation-Guide  
+   File: wiki/Installation-Guide.md
+   
+3. QUICK START TUTORIAL
+   Title: Quick-Start-Tutorial
+   File: wiki/Quick-Start-Tutorial.md
+   
+4. SYSTEM CLEANER GUIDE
+   Title: System-Cleaner-Guide
+   File: wiki/System-Cleaner-Guide.md
+   
+5. TROUBLESHOOTING
+   Title: Troubleshooting
+   File: wiki/Troubleshooting.md
+
+INSTRUCTIONS:
+============
+- Copy the content from each .md file exactly as-is
+- Use the exact titles shown above (GitHub will auto-format URLs)
+- Save each page before moving to the next
+- The Home page creates navigation links to other pages
+
+After creating all pages manually, you can run:
+.\setup_wiki.ps1 clone
+
+This will set up automated wiki management for future updates.

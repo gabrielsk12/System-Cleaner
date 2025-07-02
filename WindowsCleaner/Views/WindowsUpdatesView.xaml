@@ -1,0 +1,361 @@
+<UserControl x:Class="WindowsCleaner.Views.WindowsUpdatesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:WindowsCleaner.Converters"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Style="{StaticResource CardStyle}" Margin="0,0,0,24">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Windows Updates" 
+                             FontSize="28" 
+                             FontWeight="Bold" 
+                             Foreground="{StaticResource TextPrimaryBrush}"
+                             Margin="0,0,0,8"/>
+                    <TextBlock Text="Keep your Windows system up to date with the latest security and feature updates" 
+                             FontSize="16" 
+                             Foreground="{StaticResource TextSecondaryBrush}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button Content="🔍 Check for Updates" 
+                          Style="{StaticResource ModernButton}" 
+                          Command="{Binding CheckUpdatesCommand}"
+                          Margin="0,0,12,0"
+                          Padding="20,8"/>
+                    <Button Content="📥 Install Updates" 
+                          Style="{StaticResource SuccessButton}" 
+                          Command="{Binding InstallUpdatesCommand}"
+                          IsEnabled="{Binding HasPendingUpdates}"
+                          Padding="20,8"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- System Status -->
+        <Border Grid.Row="1" Style="{StaticResource CardStyle}" Margin="0,0,0,24">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="System Status" 
+                             FontSize="18" 
+                             FontWeight="SemiBold" 
+                             Foreground="{StaticResource TextPrimaryBrush}"
+                             Margin="0,0,0,8"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Last Update Check: " 
+                                 FontSize="14" 
+                                 Foreground="{StaticResource TextSecondaryBrush}"/>
+                        <TextBlock Text="{Binding LastUpdateCheck}" 
+                                 FontSize="14" 
+                                 FontWeight="Medium" 
+                                 Foreground="{StaticResource TextPrimaryBrush}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                        <TextBlock Text="System Version: " 
+                                 FontSize="14" 
+                                 Foreground="{StaticResource TextSecondaryBrush}"/>
+                        <TextBlock Text="{Binding WindowsVersion}" 
+                                 FontSize="14" 
+                                 FontWeight="Medium" 
+                                 Foreground="{StaticResource TextPrimaryBrush}"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Border Grid.Column="1" 
+                      CornerRadius="12" 
+                      Padding="16,8"
+                      VerticalAlignment="Center">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Background" Value="{StaticResource SuccessBrush}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding HasPendingUpdates}" Value="True">
+                                    <Setter Property="Background" Value="{StaticResource WarningBrush}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock FontSize="16" 
+                                 FontWeight="Bold" 
+                                 Foreground="White"
+                                 VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Text" Value="✓ System Up to Date"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding HasPendingUpdates}" Value="True">
+                                            <Setter Property="Text" Value="⚠ Updates Available"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <TextBlock Text="{Binding PendingUpdatesCount, StringFormat=' ({0})'}" 
+                                 FontSize="16" 
+                                 FontWeight="Bold" 
+                                 Foreground="White"
+                                 VerticalAlignment="Center"
+                                 Visibility="{Binding HasPendingUpdates, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- Updates List -->
+        <Border Grid.Row="2" Style="{StaticResource CardStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Progress Bar -->
+                <Border Grid.Row="0" 
+                      Visibility="{Binding IsChecking, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      Margin="0,0,0,16">
+                    <StackPanel>
+                        <TextBlock Text="{Binding CheckProgress}" 
+                                 FontSize="14" 
+                                 Foreground="{StaticResource TextPrimaryBrush}"
+                                 Margin="0,0,0,8"/>
+                        <ProgressBar Value="{Binding ProgressValue}" 
+                                   Maximum="100" 
+                                   Style="{StaticResource ModernProgressBar}"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Updates List -->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding PendingUpdates}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="{StaticResource SurfaceBrush}" 
+                                      BorderBrush="{StaticResource BorderBrush}" 
+                                      BorderThickness="1" 
+                                      CornerRadius="8" 
+                                      Padding="20" 
+                                      Margin="0,0,0,12">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Update Icon -->
+                                        <Border Grid.Column="0" 
+                                              Width="48" 
+                                              Height="48" 
+                                              CornerRadius="8"
+                                              Margin="0,0,16,0">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="Background" Value="{StaticResource InfoBrush}"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsSecurityUpdate}" Value="True">
+                                                            <Setter Property="Background" Value="{StaticResource DangerBrush}"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding IsFeatureUpdate}" Value="True">
+                                                            <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <TextBlock FontSize="24" 
+                                                     HorizontalAlignment="Center" 
+                                                     VerticalAlignment="Center"
+                                                     Foreground="White">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Text" Value="🔄"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsSecurityUpdate}" Value="True">
+                                                                <Setter Property="Text" Value="🛡️"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding IsFeatureUpdate}" Value="True">
+                                                                <Setter Property="Text" Value="✨"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </Border>
+
+                                        <!-- Update Information -->
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Title}" 
+                                                     FontSize="16" 
+                                                     FontWeight="SemiBold" 
+                                                     Foreground="{StaticResource TextPrimaryBrush}"
+                                                     Margin="0,0,0,4"
+                                                     TextWrapping="Wrap"/>
+                                            <TextBlock Text="{Binding Description}" 
+                                                     FontSize="12" 
+                                                     Foreground="{StaticResource TextSecondaryBrush}"
+                                                     Margin="0,0,0,4"
+                                                     TextWrapping="Wrap"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Size: " 
+                                                         FontSize="11" 
+                                                         Foreground="{StaticResource TextSecondaryBrush}"/>
+                                                <TextBlock Text="{Binding SizeText}" 
+                                                         FontSize="11" 
+                                                         FontWeight="Medium" 
+                                                         Foreground="{StaticResource TextPrimaryBrush}"
+                                                         Margin="4,0,12,0"/>
+                                                <TextBlock Text="Release Date: " 
+                                                         FontSize="11" 
+                                                         Foreground="{StaticResource TextSecondaryBrush}"/>
+                                                <TextBlock Text="{Binding ReleaseDate, StringFormat='{}{0:yyyy-MM-dd}'}" 
+                                                         FontSize="11" 
+                                                         FontWeight="Medium" 
+                                                         Foreground="{StaticResource TextPrimaryBrush}"
+                                                         Margin="4,0,0,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <!-- Priority Badge -->
+                                        <Border Grid.Column="2" 
+                                              CornerRadius="12" 
+                                              Padding="8,4"
+                                              Margin="12,0"
+                                              VerticalAlignment="Center">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="Background" Value="{StaticResource InfoBrush}"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsSecurityUpdate}" Value="True">
+                                                            <Setter Property="Background" Value="{StaticResource DangerBrush}"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding IsCritical}" Value="True">
+                                                            <Setter Property="Background" Value="{StaticResource DangerBrush}"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <TextBlock FontSize="11" 
+                                                     FontWeight="Bold" 
+                                                     Foreground="White"
+                                                     HorizontalAlignment="Center">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Text" Value="Optional"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsSecurityUpdate}" Value="True">
+                                                                <Setter Property="Text" Value="Security"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding IsCritical}" Value="True">
+                                                                <Setter Property="Text" Value="Critical"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding IsFeatureUpdate}" Value="True">
+                                                                <Setter Property="Text" Value="Feature"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </Border>
+
+                                        <!-- Install Button -->
+                                        <Button Grid.Column="3" 
+                                              Content="Install" 
+                                              Command="{Binding DataContext.InstallUpdateCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                              CommandParameter="{Binding}"
+                                              Padding="16,6">
+                                            <Button.Style>
+                                                <Style TargetType="Button" BasedOn="{StaticResource ModernButton}">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsSecurityUpdate}" Value="True">
+                                                            <Setter Property="Background" Value="{StaticResource DangerBrush}"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding IsCritical}" Value="True">
+                                                            <Setter Property="Background" Value="{StaticResource DangerBrush}"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+                <!-- Empty State -->
+                <StackPanel Grid.Row="1" 
+                          HorizontalAlignment="Center" 
+                          VerticalAlignment="Center"
+                          Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <TextBlock Text="✅" FontSize="64" HorizontalAlignment="Center" Margin="0,0,0,16"/>
+                    <TextBlock Text="Your system is up to date!" 
+                             FontSize="18" 
+                             FontWeight="Bold" 
+                             Foreground="{StaticResource TextPrimaryBrush}"
+                             HorizontalAlignment="Center"
+                             Margin="0,0,0,8"/>
+                    <TextBlock Text="No pending updates found. Check again later for new updates." 
+                             FontSize="14" 
+                             Foreground="{StaticResource TextSecondaryBrush}"
+                             HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Loading Overlay -->
+        <Grid Grid.RowSpan="3" Background="#80000000" 
+              Visibility="{Binding IsInstalling, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Border Background="{StaticResource SurfaceBrush}" 
+                  CornerRadius="12" 
+                  Padding="40"
+                  HorizontalAlignment="Center" 
+                  VerticalAlignment="Center">
+                <StackPanel HorizontalAlignment="Center">
+                    <TextBlock Text="📥" FontSize="48" HorizontalAlignment="Center" Margin="0,0,0,16"/>
+                    <TextBlock Text="Installing Updates..." 
+                             FontSize="18" 
+                             FontWeight="Bold" 
+                             Foreground="{StaticResource TextPrimaryBrush}"
+                             HorizontalAlignment="Center"
+                             Margin="0,0,0,16"/>
+                    <TextBlock Text="{Binding InstallProgress}" 
+                             FontSize="14" 
+                             Foreground="{StaticResource TextSecondaryBrush}"
+                             HorizontalAlignment="Center"
+                             Margin="0,0,0,16"/>
+                    <ProgressBar Value="{Binding ProgressValue}" 
+                               Maximum="100" 
+                               Width="300" 
+                               Style="{StaticResource ModernProgressBar}"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

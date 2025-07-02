@@ -14,6 +14,7 @@
     <Copyright>Copyright © 2025</Copyright>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>WindowsCleaner</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -30,6 +31,75 @@
     <PackageReference Include="System.Management" Version="8.0.0" />
     <PackageReference Include="TaskScheduler" Version="2.10.1" />
     <PackageReference Include="System.Text.Json" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\CrashReportWindow.xaml.cs">
+      <DependentUpon>CrashReportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DriverUpdatesView.xaml.cs">
+      <DependentUpon>DriverUpdatesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\WindowsUpdatesView.xaml.cs">
+      <DependentUpon>WindowsUpdatesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\StartupProgramsView.xaml.cs">
+      <DependentUpon>StartupProgramsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="ViewModels\DriverUpdatesViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\WindowsUpdatesViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\StartupProgramsViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="Views\CrashReportWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DriverUpdatesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowsUpdatesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StartupProgramsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ResourceDictionaries\LocalizedStrings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ResourceDictionaries\FluidAnimations.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ResourceDictionaries\EnhancedControls.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <!-- Disable default embedded resource handling to avoid NETSDK1022 errors -->
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Strings\*.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>%(Filename).Designer.cs</LastGenOutput>
+      <LogicalName>WindowsCleaner.Resources.Strings.%(Filename).resources</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Update="Resources\Strings\*.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>%(Filename).resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

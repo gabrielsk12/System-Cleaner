@@ -1,0 +1,374 @@
+<UserControl x:Class="WindowsCleaner.Views.StartupProgramsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:WindowsCleaner.Converters"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Style="{StaticResource CardStyle}" Margin="0,0,0,24">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Startup Programs" 
+                             FontSize="28" 
+                             FontWeight="Bold" 
+                             Foreground="{StaticResource TextPrimaryBrush}"
+                             Margin="0,0,0,8"/>
+                    <TextBlock Text="Manage programs that start automatically with Windows to improve boot times" 
+                             FontSize="16" 
+                             Foreground="{StaticResource TextSecondaryBrush}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button Content="🔍 Refresh List" 
+                          Style="{StaticResource ModernButton}" 
+                          Command="{Binding RefreshCommand}"
+                          Margin="0,0,12,0"
+                          Padding="20,8"/>
+                    <Button Content="⚡ Optimize Startup" 
+                          Style="{StaticResource AccentButton}" 
+                          Command="{Binding OptimizeCommand}"
+                          Padding="20,8"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Performance Impact Summary -->
+        <Border Grid.Row="1" Style="{StaticResource CardStyle}" Margin="0,0,0,24">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Startup Performance Impact" 
+                             FontSize="18" 
+                             FontWeight="SemiBold" 
+                             Foreground="{StaticResource TextPrimaryBrush}"
+                             Margin="0,0,0,8"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Total Programs: " 
+                                 FontSize="14" 
+                                 Foreground="{StaticResource TextSecondaryBrush}"/>
+                        <TextBlock Text="{Binding TotalPrograms}" 
+                                 FontSize="14" 
+                                 FontWeight="Medium" 
+                                 Foreground="{StaticResource TextPrimaryBrush}"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Impact Levels -->
+                <StackPanel Grid.Column="1" Margin="20,0">
+                    <TextBlock Text="High Impact" 
+                             FontSize="12" 
+                             Foreground="{StaticResource DangerBrush}"
+                             FontWeight="Bold"
+                             Margin="0,0,0,4"/>
+                    <TextBlock Text="{Binding HighImpactCount}" 
+                             FontSize="18" 
+                             FontWeight="Bold" 
+                             Foreground="{StaticResource DangerBrush}"
+                             HorizontalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Margin="20,0">
+                    <TextBlock Text="Medium Impact" 
+                             FontSize="12" 
+                             Foreground="{StaticResource WarningBrush}"
+                             FontWeight="Bold"
+                             Margin="0,0,0,4"/>
+                    <TextBlock Text="{Binding MediumImpactCount}" 
+                             FontSize="18" 
+                             FontWeight="Bold" 
+                             Foreground="{StaticResource WarningBrush}"
+                             HorizontalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="3" Margin="20,0">
+                    <TextBlock Text="Low Impact" 
+                             FontSize="12" 
+                             Foreground="{StaticResource SuccessBrush}"
+                             FontWeight="Bold"
+                             Margin="0,0,0,4"/>
+                    <TextBlock Text="{Binding LowImpactCount}" 
+                             FontSize="18" 
+                             FontWeight="Bold" 
+                             Foreground="{StaticResource SuccessBrush}"
+                             HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Programs List -->
+        <Border Grid.Row="2" Style="{StaticResource CardStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Filter and Sort Options -->
+                <Grid Grid.Row="0" Margin="0,0,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="Filter by impact: " 
+                                 FontSize="14" 
+                                 Foreground="{StaticResource TextSecondaryBrush}" 
+                                 VerticalAlignment="Center"
+                                 Margin="0,0,8,0"/>
+                        <ComboBox SelectedItem="{Binding SelectedFilter}" 
+                                ItemsSource="{Binding FilterOptions}"
+                                MinWidth="120"
+                                Padding="8,4"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" Orientation="Horizontal">
+                        <Button Content="📖 Show Details" 
+                              Style="{StaticResource ModernButton}" 
+                              Command="{Binding ToggleDetailsCommand}"
+                              Margin="0,0,12,0"
+                              Padding="16,6"/>
+                        <Button Content="🚫 Disable Selected" 
+                              Style="{StaticResource DangerButton}" 
+                              Command="{Binding DisableSelectedCommand}"
+                              IsEnabled="{Binding HasSelectedPrograms}"
+                              Padding="16,6"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Programs List -->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding FilteredPrograms}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="{StaticResource SurfaceBrush}" 
+                                      BorderBrush="{StaticResource BorderBrush}" 
+                                      BorderThickness="1" 
+                                      CornerRadius="8" 
+                                      Padding="20" 
+                                      Margin="0,0,0,12">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Selection Checkbox -->
+                                        <CheckBox Grid.Column="0" 
+                                                IsChecked="{Binding IsSelected}" 
+                                                Style="{StaticResource ModernCheckBox}"
+                                                VerticalAlignment="Top"
+                                                Margin="0,0,16,0"/>
+
+                                        <!-- Program Icon -->
+                                        <Border Grid.Column="1" 
+                                              Width="48" 
+                                              Height="48" 
+                                              Background="{StaticResource SecondaryBrush}"
+                                              CornerRadius="8"
+                                              Margin="0,0,16,0">
+                                            <TextBlock Text="📱" 
+                                                     FontSize="24" 
+                                                     HorizontalAlignment="Center" 
+                                                     VerticalAlignment="Center"/>
+                                        </Border>
+
+                                        <!-- Program Information -->
+                                        <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Name}" 
+                                                     FontSize="16" 
+                                                     FontWeight="SemiBold" 
+                                                     Foreground="{StaticResource TextPrimaryBrush}"
+                                                     Margin="0,0,0,4"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Publisher: " 
+                                                         FontSize="12" 
+                                                         Foreground="{StaticResource TextSecondaryBrush}"/>
+                                                <TextBlock Text="{Binding Publisher}" 
+                                                         FontSize="12" 
+                                                         FontWeight="Medium" 
+                                                         Foreground="{StaticResource TextPrimaryBrush}"
+                                                         Margin="4,0,12,0"/>
+                                                <TextBlock Text="Status: " 
+                                                         FontSize="12" 
+                                                         Foreground="{StaticResource TextSecondaryBrush}"/>
+                                                <TextBlock FontSize="12" 
+                                                         FontWeight="Medium" 
+                                                         Margin="4,0,0,0">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Text" Value="Enabled"/>
+                                                            <Setter Property="Foreground" Value="{StaticResource SuccessBrush}"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsEnabled}" Value="False">
+                                                                    <Setter Property="Text" Value="Disabled"/>
+                                                                    <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+                                            </StackPanel>
+                                            
+                                            <!-- Additional Details (Collapsible) -->
+                                            <StackPanel Visibility="{Binding DataContext.ShowDetails, RelativeSource={RelativeSource AncestorType=UserControl}, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                      Margin="0,8,0,0">
+                                                <TextBlock Text="{Binding Command}" 
+                                                         FontSize="11" 
+                                                         Foreground="{StaticResource TextSecondaryBrush}"
+                                                         FontFamily="Consolas"
+                                                         Margin="0,0,0,4"
+                                                         TextWrapping="Wrap"/>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Startup Delay: " 
+                                                             FontSize="11" 
+                                                             Foreground="{StaticResource TextSecondaryBrush}"/>
+                                                    <TextBlock Text="{Binding StartupDelay}" 
+                                                             FontSize="11" 
+                                                             FontWeight="Medium" 
+                                                             Foreground="{StaticResource TextPrimaryBrush}"
+                                                             Margin="4,0,12,0"/>
+                                                    <TextBlock Text="Registry Location: " 
+                                                             FontSize="11" 
+                                                             Foreground="{StaticResource TextSecondaryBrush}"/>
+                                                    <TextBlock Text="{Binding RegistryLocation}" 
+                                                             FontSize="11" 
+                                                             FontWeight="Medium" 
+                                                             Foreground="{StaticResource TextPrimaryBrush}"
+                                                             Margin="4,0,0,0"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <!-- Impact Badge -->
+                                        <Border Grid.Column="3" 
+                                              CornerRadius="12" 
+                                              Padding="8,4"
+                                              Margin="12,0"
+                                              VerticalAlignment="Center">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="Background" Value="{StaticResource SuccessBrush}"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding ImpactLevel}" Value="Medium">
+                                                            <Setter Property="Background" Value="{StaticResource WarningBrush}"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding ImpactLevel}" Value="High">
+                                                            <Setter Property="Background" Value="{StaticResource DangerBrush}"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <TextBlock Text="{Binding ImpactLevel}" 
+                                                     FontSize="11" 
+                                                     FontWeight="Bold" 
+                                                     Foreground="White"
+                                                     HorizontalAlignment="Center"/>
+                                        </Border>
+
+                                        <!-- Action Button -->
+                                        <StackPanel Grid.Column="4" Orientation="Horizontal">
+                                            <Button Command="{Binding DataContext.ToggleStartupCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                  CommandParameter="{Binding}"
+                                                  Padding="16,6"
+                                                  Margin="8,0">
+                                                <Button.Style>
+                                                    <Style TargetType="Button" BasedOn="{StaticResource ModernButton}">
+                                                        <Setter Property="Content" Value="Disable"/>
+                                                        <Setter Property="Background" Value="{StaticResource DangerBrush}"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding IsEnabled}" Value="False">
+                                                                <Setter Property="Content" Value="Enable"/>
+                                                                <Setter Property="Background" Value="{StaticResource SuccessBrush}"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Button.Style>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+                <!-- Empty State -->
+                <StackPanel Grid.Row="1" 
+                          HorizontalAlignment="Center" 
+                          VerticalAlignment="Center"
+                          Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <TextBlock Text="🚀" FontSize="64" HorizontalAlignment="Center" Margin="0,0,0,16"/>
+                    <TextBlock Text="No startup programs found!" 
+                             FontSize="18" 
+                             FontWeight="Bold" 
+                             Foreground="{StaticResource TextPrimaryBrush}"
+                             HorizontalAlignment="Center"
+                             Margin="0,0,0,8"/>
+                    <TextBlock Text="Your system is already optimized for fast startup." 
+                             FontSize="14" 
+                             Foreground="{StaticResource TextSecondaryBrush}"
+                             HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Loading Overlay -->
+        <Grid Grid.RowSpan="3" Background="#80000000" 
+              Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Border Background="{StaticResource SurfaceBrush}" 
+                  CornerRadius="12" 
+                  Padding="40"
+                  HorizontalAlignment="Center" 
+                  VerticalAlignment="Center">
+                <StackPanel HorizontalAlignment="Center">
+                    <TextBlock Text="🔍" FontSize="48" HorizontalAlignment="Center" Margin="0,0,0,16"/>
+                    <TextBlock Text="Analyzing Startup Programs..." 
+                             FontSize="18" 
+                             FontWeight="Bold" 
+                             Foreground="{StaticResource TextPrimaryBrush}"
+                             HorizontalAlignment="Center"
+                             Margin="0,0,0,16"/>
+                    <TextBlock Text="{Binding LoadingProgress}" 
+                             FontSize="14" 
+                             Foreground="{StaticResource TextSecondaryBrush}"
+                             HorizontalAlignment="Center"
+                             Margin="0,0,0,16"/>
+                    <ProgressBar Value="{Binding ProgressValue}" 
+                               Maximum="100" 
+                               Width="300" 
+                               Style="{StaticResource ModernProgressBar}"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

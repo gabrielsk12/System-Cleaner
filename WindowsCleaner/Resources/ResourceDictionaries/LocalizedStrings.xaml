@@ -1,0 +1,111 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:WindowsCleaner">
+    
+    <!-- This resource dictionary provides access to localized strings from XAML -->
+    
+    <!-- Main Window Tabs -->
+    <system:String x:Key="Tab_SystemCleaner">🧹 System Cleaner</system:String>
+    <system:String x:Key="Tab_FileExplorer">📂 File Explorer</system:String>
+    <system:String x:Key="Tab_DriverUpdates">🔧 Driver Updates</system:String>
+    <system:String x:Key="Tab_WindowsUpdates">📥 Windows Updates</system:String>
+    <system:String x:Key="Tab_StartupPrograms">🚀 Startup Programs</system:String>
+    <system:String x:Key="Tab_Settings">⚙️ Settings</system:String>
+
+    <!-- Common Strings -->
+    <system:String x:Key="AppTitle">Windows System Cleaner Pro</system:String>
+    <system:String x:Key="Yes">Yes</system:String>
+    <system:String x:Key="No">No</system:String>
+    <system:String x:Key="OK">OK</system:String>
+    <system:String x:Key="Cancel">Cancel</system:String>
+    <system:String x:Key="Apply">Apply</system:String>
+    <system:String x:Key="Save">Save</system:String>
+    <system:String x:Key="Close">Close</system:String>
+    <system:String x:Key="Error">Error</system:String>
+    <system:String x:Key="Warning">Warning</system:String>
+    <system:String x:Key="Information">Information</system:String>
+    <system:String x:Key="Success">Success</system:String>
+
+    <!-- System Cleaner Tab -->
+    <system:String x:Key="SystemCleaner_Title">Windows System Cleaner Pro</system:String>
+    <system:String x:Key="SystemCleaner_Subtitle">Clean system files and optimize your Windows performance</system:String>
+    <system:String x:Key="SystemCleaner_TotalToClean">Total to clean:</system:String>
+    <system:String x:Key="SystemCleaner_SelectCategories">Select categories to scan and clean:</system:String>
+    <system:String x:Key="SystemCleaner_SelectAll">Select All</system:String>
+    <system:String x:Key="SystemCleaner_SelectNone">Select None</system:String>
+    <system:String x:Key="SystemCleaner_ScanSystem">🔍 Scan System</system:String>
+    <system:String x:Key="SystemCleaner_CleanSelectedFiles">🧹 Clean Selected Files</system:String>
+    <system:String x:Key="SystemCleaner_CleaningFiles">Cleaning Files...</system:String>
+    <system:String x:Key="SystemCleaner_AdminPrivileges">⚠️ Administrator privileges recommended for best results</system:String>
+
+    <!-- Driver Updates Tab -->
+    <system:String x:Key="DriverUpdates_Title">Driver Updates</system:String>
+    <system:String x:Key="DriverUpdates_Subtitle">Check and update your system drivers to ensure optimal performance</system:String>
+    <system:String x:Key="DriverUpdates_ScanForUpdates">🔍 Scan for Updates</system:String>
+    <system:String x:Key="DriverUpdates_UpdateAll">⚡ Update All</system:String>
+    <system:String x:Key="DriverUpdates_LastScanned">Last Scanned:</system:String>
+    <system:String x:Key="DriverUpdates_DriversToUpdate">Drivers to Update:</system:String>
+    <system:String x:Key="DriverUpdates_OutdatedDrivers">Outdated Drivers</system:String>
+    <system:String x:Key="DriverUpdates_UpToDateDrivers">Up-to-Date Drivers</system:String>
+
+    <!-- Windows Updates Tab -->
+    <system:String x:Key="WindowsUpdates_Title">Windows Updates</system:String>
+    <system:String x:Key="WindowsUpdates_Subtitle">Check and manage Windows updates to keep your system secure and optimized</system:String>
+    <system:String x:Key="WindowsUpdates_CheckForUpdates">🔍 Check for Updates</system:String>
+    <system:String x:Key="WindowsUpdates_InstallUpdates">📥 Install Updates</system:String>
+    <system:String x:Key="WindowsUpdates_WindowsVersion">Windows Version:</system:String>
+    <system:String x:Key="WindowsUpdates_LastChecked">Last Checked:</system:String>
+    <system:String x:Key="WindowsUpdates_LastInstalled">Last Installed:</system:String>
+    <system:String x:Key="WindowsUpdates_RestartRequired">Restart Required:</system:String>
+    <system:String x:Key="WindowsUpdates_AutoUpdateEnabled">Auto-Update Enabled:</system:String>
+    <system:String x:Key="WindowsUpdates_AvailableUpdates">Available Updates</system:String>
+    <system:String x:Key="WindowsUpdates_NoUpdatesAvailable">No updates available. Your system is up to date.</system:String>
+
+    <!-- Startup Programs Tab -->
+    <system:String x:Key="StartupPrograms_Title">Startup Programs</system:String>
+    <system:String x:Key="StartupPrograms_Subtitle">Manage programs that start automatically with Windows to improve boot times</system:String>
+    <system:String x:Key="StartupPrograms_RefreshList">🔍 Refresh List</system:String>
+    <system:String x:Key="StartupPrograms_OptimizeStartup">⚡ Optimize Startup</system:String>
+    <system:String x:Key="StartupPrograms_StartupPerformanceImpact">Startup Performance Impact</system:String>
+    <system:String x:Key="StartupPrograms_TotalPrograms">Total Programs:</system:String>
+    <system:String x:Key="StartupPrograms_HighImpact">High Impact</system:String>
+    <system:String x:Key="StartupPrograms_MediumImpact">Medium Impact</system:String>
+    <system:String x:Key="StartupPrograms_LowImpact">Low Impact</system:String>
+    <system:String x:Key="StartupPrograms_EnableSelected">Enable Selected</system:String>
+    <system:String x:Key="StartupPrograms_DisableSelected">Disable Selected</system:String>
+    <system:String x:Key="StartupPrograms_Status">Status</system:String>
+    <system:String x:Key="StartupPrograms_Name">Name</system:String>
+    <system:String x:Key="StartupPrograms_Publisher">Publisher</system:String>
+    <system:String x:Key="StartupPrograms_ImpactLevel">Impact Level</system:String>
+    <system:String x:Key="StartupPrograms_StartupType">Startup Type</system:String>
+
+    <!-- Settings Tab -->
+    <system:String x:Key="Settings_Title">Settings</system:String>
+    <system:String x:Key="Settings_Subtitle">Customize application settings and preferences</system:String>
+    <system:String x:Key="Settings_General">General</system:String>
+    <system:String x:Key="Settings_Language">Language</system:String>
+    <system:String x:Key="Settings_Theme">Theme</system:String>
+    <system:String x:Key="Settings_Light">Light</system:String>
+    <system:String x:Key="Settings_Dark">Dark</system:String>
+    <system:String x:Key="Settings_System">System</system:String>
+    <system:String x:Key="Settings_StartWithWindows">Start with Windows</system:String>
+    <system:String x:Key="Settings_MinimizeToTray">Minimize to System Tray</system:String>
+    <system:String x:Key="Settings_CheckForUpdates">Check for Updates</system:String>
+    <system:String x:Key="Settings_AutomaticUpdates">Automatic Updates</system:String>
+    <system:String x:Key="Settings_Advanced">Advanced</system:String>
+    <system:String x:Key="Settings_IncludeSystemProtectedFiles">Include System Protected Files</system:String>
+    <system:String x:Key="Settings_EnableLogging">Enable Logging</system:String>
+    <system:String x:Key="Settings_ClearLogs">Clear Logs</system:String>
+    <system:String x:Key="Settings_ResetAllSettings">Reset All Settings</system:String>
+
+    <!-- Crash Reporting -->
+    <system:String x:Key="CrashReport_Title">Application Crash Report</system:String>
+    <system:String x:Key="CrashReport_Message">Windows System Cleaner Pro has encountered an error and needs to close. We apologize for the inconvenience.</system:String>
+    <system:String x:Key="CrashReport_Details">Details</system:String>
+    <system:String x:Key="CrashReport_SendReport">Send Report</system:String>
+    <system:String x:Key="CrashReport_DontSend">Don't Send</system:String>
+    <system:String x:Key="CrashReport_ViewLogFile">View Log File</system:String>
+    <system:String x:Key="CrashReport_RestartApp">Restart Application</system:String>
+    
+</ResourceDictionary>

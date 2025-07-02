@@ -1,0 +1,279 @@
+<UserControl x:Class="WindowsCleaner.Views.DriverUpdatesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:WindowsCleaner.Converters"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <converters:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter"/>
+    </UserControl.Resources>
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border Grid.Row="0" Style="{StaticResource CardStyle}" Margin="0,0,0,24">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Driver Updates" 
+                             FontSize="28" 
+                             FontWeight="Bold" 
+                             Foreground="{StaticResource TextPrimaryBrush}"
+                             Margin="0,0,0,8"/>
+                    <TextBlock Text="Check and update your system drivers for optimal performance" 
+                             FontSize="16" 
+                             Foreground="{StaticResource TextSecondaryBrush}"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button Content="🔍 Scan Drivers" 
+                          Style="{StaticResource ModernButton}" 
+                          Command="{Binding ScanDriversCommand}"
+                          Visibility="{Binding IsNotBusy, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          Margin="0,0,12,0"
+                          Padding="20,8"/>
+                    <Button Content="🔄 Update All" 
+                          Style="{StaticResource SuccessButton}" 
+                          Command="{Binding UpdateAllDriversCommand}"
+                          IsEnabled="{Binding HasUpdatesAvailable}"
+                          Visibility="{Binding IsNotBusy, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          Margin="0,0,12,0"
+                          Padding="20,8"/>
+                    <Button Content="❌ Cancel" 
+                          Style="{StaticResource WarningButton}" 
+                          Command="{Binding CancelCommand}"
+                          Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"
+                          Padding="20,8"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Drivers List -->
+        <Border Grid.Row="1" Style="{StaticResource CardStyle}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Status Bar -->
+                <Grid Grid.Row="0" Margin="0,0,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" 
+                             Text="{Binding StatusText}" 
+                             FontSize="14" 
+                             Foreground="{StaticResource TextSecondaryBrush}" 
+                             VerticalAlignment="Center"/>
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <TextBlock Text="Drivers scanned: " 
+                                 FontSize="12" 
+                                 Foreground="{StaticResource TextSecondaryBrush}" 
+                                 VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding TotalDrivers}" 
+                                 FontSize="12" 
+                                 FontWeight="Bold" 
+                                 Foreground="{StaticResource PrimaryBrush}" 
+                                 VerticalAlignment="Center"
+                                 Margin="4,0,12,0"/>
+                        <TextBlock Text="Updates available: " 
+                                 FontSize="12" 
+                                 Foreground="{StaticResource TextSecondaryBrush}" 
+                                 VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding UpdatesAvailable}" 
+                                 FontSize="12" 
+                                 FontWeight="Bold" 
+                                 Foreground="{StaticResource AccentBrush}" 
+                                 VerticalAlignment="Center"
+                                 Margin="4,0,12,0"/>
+                        <TextBlock Text="Last scan: " 
+                                 FontSize="12" 
+                                 Foreground="{StaticResource TextSecondaryBrush}" 
+                                 VerticalAlignment="Center"
+                                 Visibility="{Binding LastScanTime, Converter={StaticResource ObjectToVisibilityConverter}}"/>
+                        <TextBlock Text="{Binding LastScanTime, StringFormat='{}{0:g}'}" 
+                                 FontSize="12" 
+                                 FontWeight="Bold" 
+                                 Foreground="{StaticResource SecondaryBrush}" 
+                                 VerticalAlignment="Center"
+                                 Visibility="{Binding LastScanTime, Converter={StaticResource ObjectToVisibilityConverter}}"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Progress Bar -->
+                <Border Grid.Row="1" 
+                      Visibility="{Binding IsScanning, Converter={StaticResource BooleanToVisibilityConverter}}"
+                      Margin="0,0,0,16">
+                    <StackPanel>
+                        <TextBlock Text="{Binding ScanProgress}" 
+                                 FontSize="14" 
+                                 Foreground="{StaticResource TextPrimaryBrush}"
+                                 Margin="0,0,0,8"/>
+                        <ProgressBar Value="{Binding ProgressValue}" 
+                                   Maximum="100" 
+                                   Style="{StaticResource ModernProgressBar}"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Drivers List -->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding Drivers}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="{StaticResource SurfaceBrush}" 
+                                      BorderBrush="{StaticResource BorderBrush}" 
+                                      BorderThickness="1" 
+                                      CornerRadius="8" 
+                                      Padding="20" 
+                                      Margin="0,0,0,12">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- Driver Icon -->
+                                        <Border Grid.Column="0" 
+                                              Width="48" 
+                                              Height="48" 
+                                              Background="{StaticResource PrimaryBrush}"
+                                              CornerRadius="8"
+                                              Margin="0,0,16,0">
+                                            <TextBlock Text="🔧" 
+                                                     FontSize="24" 
+                                                     HorizontalAlignment="Center" 
+                                                     VerticalAlignment="Center"/>
+                                        </Border>
+
+                                        <!-- Driver Information -->
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding DeviceName}" 
+                                                     FontSize="16" 
+                                                     FontWeight="SemiBold" 
+                                                     Foreground="{StaticResource TextPrimaryBrush}"
+                                                     Margin="0,0,0,4"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Current: " 
+                                                         FontSize="12" 
+                                                         Foreground="{StaticResource TextSecondaryBrush}"/>
+                                                <TextBlock Text="{Binding CurrentVersion}" 
+                                                         FontSize="12" 
+                                                         FontWeight="Medium" 
+                                                         Foreground="{StaticResource TextPrimaryBrush}"
+                                                         Margin="4,0,12,0"/>
+                                                <TextBlock Text="Available: " 
+                                                         FontSize="12" 
+                                                         Foreground="{StaticResource TextSecondaryBrush}"
+                                                         Visibility="{Binding HasUpdate, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                                <TextBlock Text="{Binding LatestVersion}" 
+                                                         FontSize="12" 
+                                                         FontWeight="Medium" 
+                                                         Foreground="{StaticResource AccentBrush}"
+                                                         Margin="4,0,0,0"
+                                                         Visibility="{Binding HasUpdate, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                            </StackPanel>
+                                            <TextBlock Text="{Binding Manufacturer}" 
+                                                     FontSize="11" 
+                                                     Foreground="{StaticResource TextSecondaryBrush}"
+                                                     Margin="0,2,0,0"/>
+                                        </StackPanel>
+
+                                        <!-- Status Badge -->
+                                        <Border Grid.Column="2" 
+                                              CornerRadius="12" 
+                                              Padding="8,4"
+                                              Margin="12,0"
+                                              VerticalAlignment="Center">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="Background" Value="{StaticResource SuccessBrush}"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding HasUpdate}" Value="True">
+                                                            <Setter Property="Background" Value="{StaticResource WarningBrush}"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <TextBlock FontSize="11" 
+                                                     FontWeight="Bold" 
+                                                     Foreground="White"
+                                                     HorizontalAlignment="Center">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Text" Value="Up to date"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding HasUpdate}" Value="True">
+                                                                <Setter Property="Text" Value="Update Available"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </Border>
+
+                                        <!-- Update Button -->
+                                        <Button Grid.Column="3" 
+                                              Content="Update" 
+                                              Style="{StaticResource ModernButton}" 
+                                              Command="{Binding DataContext.UpdateDriverCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                              CommandParameter="{Binding}"
+                                              Visibility="{Binding HasUpdate, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                              Padding="16,6"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+
+        <!-- Loading Overlay -->
+        <Grid Grid.RowSpan="3" Background="#80000000" 
+              Visibility="{Binding IsUpdating, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Border Background="{StaticResource SurfaceBrush}" 
+                  CornerRadius="12" 
+                  Padding="40"
+                  HorizontalAlignment="Center" 
+                  VerticalAlignment="Center">
+                <StackPanel HorizontalAlignment="Center">
+                    <TextBlock Text="🔄" FontSize="48" HorizontalAlignment="Center" Margin="0,0,0,16"/>
+                    <TextBlock Text="Updating Drivers..." 
+                             FontSize="18" 
+                             FontWeight="Bold" 
+                             Foreground="{StaticResource TextPrimaryBrush}"
+                             HorizontalAlignment="Center"
+                             Margin="0,0,0,16"/>
+                    <TextBlock Text="{Binding UpdateProgress}" 
+                             FontSize="14" 
+                             Foreground="{StaticResource TextSecondaryBrush}"
+                             HorizontalAlignment="Center"
+                             Margin="0,0,0,16"/>
+                    <ProgressBar Value="{Binding ProgressValue}" 
+                               Maximum="100" 
+                               Width="300" 
+                               Style="{StaticResource ModernProgressBar}"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
