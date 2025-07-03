@@ -11,6 +11,8 @@
     <Company>System Optimizer</Company>
     <Product>Windows Cleaner Pro</Product>
     <Copyright>Copyright © 2025</Copyright>
+    <ApplicationIcon>Resources\Icons\app.ico</ApplicationIcon>
+    <Win32Resource />
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>WindowsCleaner</RootNamespace>
@@ -32,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Icons\app.ico" />
     <Resource Include="Resources\Icons\win.png" />
   </ItemGroup>
 

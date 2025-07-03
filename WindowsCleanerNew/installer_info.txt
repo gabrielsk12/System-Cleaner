@@ -1,0 +1,29 @@
+Welcome to Windows System Cleaner Pro Setup!
+
+This installer will guide you through the installation of Windows System Cleaner Pro, a comprehensive system optimization and cleaning tool for Windows.
+
+Key Features:
+• System Cleanup - Remove temporary files, browser cache, and system junk
+• Driver Management - Check for and update system drivers automatically  
+• File Explorer - Browse and manage files with advanced filtering
+• Performance Monitoring - Real-time system performance tracking
+• Startup Management - Control which applications start with Windows
+• Windows Updates - Manage and install Windows updates
+• Scheduled Cleaning - Set up automatic cleaning schedules
+• Modern UI - Clean, responsive Windows Presentation Foundation interface
+
+System Requirements:
+• Windows 10 version 1809 or later / Windows 11
+• .NET 8.0 Runtime (automatically installed if missing)
+• Administrator privileges for driver updates and system cleaning
+• Minimum 100 MB free disk space
+
+IMPORTANT NOTES:
+• This application requires administrator privileges for full functionality
+• Some features may trigger Windows Defender or antivirus warnings due to system access requirements
+• Always create a system backup before performing extensive cleaning operations
+• The application will create settings in %LOCALAPPDATA%\WindowsCleaner\
+
+For more information, visit: https://github.com/gabrielsk12/System-Cleaner
+
+Click Next to continue with the installation.
