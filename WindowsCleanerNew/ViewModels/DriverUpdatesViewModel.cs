@@ -76,17 +76,17 @@ namespace WindowsCleaner.ViewModels
             if (driver == null) return;
 
             IsLoading = true;
-            StatusMessage = $"Updating {driver.Name}...";
+            StatusMessage = $"Updating {driver.DeviceName}...";
             
             try
             {
                 await _driverService.UpdateDriverAsync(driver);
-                StatusMessage = $"Successfully updated {driver.Name}";
+                StatusMessage = $"Successfully updated {driver.DeviceName}";
                 await RefreshDriversAsync();
             }
             catch (Exception ex)
             {
-                StatusMessage = $"Error updating {driver.Name}: {ex.Message}";
+                StatusMessage = $"Error updating {driver.DeviceName}: {ex.Message}";
             }
             finally
             {

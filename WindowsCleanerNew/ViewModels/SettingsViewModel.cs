@@ -25,7 +25,7 @@ namespace WindowsCleaner.ViewModels
 
         public SettingsViewModel()
         {
-            _settingsService = new SettingsService();
+            _settingsService = SettingsService.Instance;
             _localizationService = LocalizationService.Instance;
             Settings = _settingsService.Settings;
 

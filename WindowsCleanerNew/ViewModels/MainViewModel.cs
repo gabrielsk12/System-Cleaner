@@ -29,7 +29,7 @@ namespace WindowsCleaner.ViewModels
         public MainViewModel()
         {
             _cleanerService = new CleanerService();
-            _settingsService = new SettingsService();
+            _settingsService = SettingsService.Instance;
             CleanupCategories = new ObservableCollection<CleanupCategory>();
             
             // Initialize view models for tabs

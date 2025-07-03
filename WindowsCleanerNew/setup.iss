@@ -1,9 +1,9 @@
 #define MyAppName "Windows System Cleaner Pro"
-#define MyAppVersion "1.0.1"
+#define MyAppVersion "2.0.0"
 #define MyAppPublisher "System Optimizer"
 #define MyAppURL "https://github.com/gabrielsk12/System-Cleaner"
 #define MyAppExeName "WindowsCleanerNew.exe"
-#define MyAppIcoName "app.ico"
+#define MyAppIcoName "win.ico"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -22,7 +22,7 @@ LicenseFile=..\LICENSE
 InfoBeforeFile=installer_info.txt
 OutputDir=..\dist
 OutputBaseFilename=WindowsSystemCleanerPro_Setup_v{#MyAppVersion}
-SetupIconFile=Resources\Icons\{#MyAppIcoName}
+SetupIconFile={#MyAppIcoName}
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -68,19 +68,18 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 Name: "startup"; Description: "Start {#MyAppName} when Windows starts"; GroupDescription: "Startup Options"; Flags: unchecked
 
 [Files]
-Source: "bin\Release\net8.0-windows\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\net8.0-windows\*.dll"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "bin\Release\net8.0-windows\*.json"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs; AfterInstall: SetConfigPermissions
+Source: "bin\Release\net8.0-windows\win-x64\publish\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#MyAppIcoName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Resources\Icons\*"; DestDir: "{app}\Resources\Icons"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\README.md"; DestDir: "{app}"; DestName: "README.txt"; Flags: ignoreversion
 Source: "..\LICENSE"; DestDir: "{app}"; DestName: "LICENSE.txt"; Flags: ignoreversion
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\Resources\Icons\{#MyAppIcoName}"
+Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppIcoName}"
 Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "{#MyAppURL}"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
-Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\Resources\Icons\{#MyAppIcoName}"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\Resources\Icons\{#MyAppIcoName}"; Tasks: quicklaunchicon
+Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppIcoName}"; Tasks: desktopicon
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppIcoName}"; Tasks: quicklaunchicon
 
 [Registry]
 Root: HKCU; Subkey: "Software\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "{#MyAppName}"; ValueData: """{app}\{#MyAppExeName}"" --minimized"; Flags: uninsdeletevalue; Tasks: startup
@@ -118,11 +117,13 @@ begin
 end;
 
 function NextButtonClick(CurPageID: Integer): Boolean;
+var
+  ResultCode: Integer;
 begin
   Result := True;
   if (CurPageID = wpSelectDir) and IsUpgrade() then begin
     if MsgBox('A previous version of {#MyAppName} is already installed. Do you want to uninstall it first?', mbConfirmation, MB_YESNO) = IDYES then begin
-      Exec(RemoveQuotes(GetUninstallString()), '/SILENT', '', SW_HIDE, ewWaitUntilTerminated, Result);
+      Exec(RemoveQuotes(GetUninstallString()), '/SILENT', '', SW_HIDE, ewWaitUntilTerminated, ResultCode);
     end;
   end;
 end;

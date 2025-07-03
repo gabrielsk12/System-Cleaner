@@ -7,10 +7,13 @@ namespace WindowsCleaner.Services
 {
     public class SettingsService
     {
+        private static SettingsService? _instance;
         private readonly string _settingsPath;
         private AppSettings _settings;
 
-        public SettingsService()
+        public static SettingsService Instance => _instance ??= new SettingsService();
+
+        private SettingsService()
         {
             var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             var appFolder = Path.Combine(appDataPath, "WindowsCleaner");

@@ -35,7 +35,7 @@ namespace WindowsCleaner.Services
             try
             {
                 // Check if there's a saved language preference
-                var settings = new SettingsService();
+                var settings = SettingsService.Instance;
                 var savedLanguage = settings.GetSetting<string>("Language");
 
                 if (!string.IsNullOrEmpty(savedLanguage))
@@ -103,7 +103,7 @@ namespace WindowsCleaner.Services
         {
             try
             {
-                var settings = new SettingsService();
+                var settings = SettingsService.Instance;
                 settings.SaveSetting("Language", cultureName);
             }
             catch (Exception ex)
