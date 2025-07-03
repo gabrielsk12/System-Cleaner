@@ -6,12 +6,12 @@
     <UseWPF>true</UseWPF>
     <AssemblyTitle>Windows System Cleaner</AssemblyTitle>
     <AssemblyDescription>Advanced Windows system cleaner to optimize performance</AssemblyDescription>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
     <Company>System Optimizer</Company>
     <Product>Windows Cleaner Pro</Product>
     <Copyright>Copyright © 2025</Copyright>
-    <ApplicationIcon>Resources\Icons\app.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Icons\app.png</ApplicationIcon>
     <Win32Resource />
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>

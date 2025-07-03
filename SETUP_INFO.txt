@@ -1,0 +1,75 @@
+# Windows System Cleaner Pro 2.0.0 Setup Information
+
+## What's New in Version 2.0.0
+
+### Enhanced Features
+- **Modernized Architecture**: Built with .NET 8.0 for improved performance and security
+- **Advanced Driver Management**: Comprehensive driver scanning and updating capabilities
+- **Smart File Explorer**: Enhanced file management with advanced cleaning options
+- **Automated Scheduling**: Set up automatic system cleaning schedules
+- **Multi-language Support**: Available in English, Slovak, Czech, Russian, German, Korean, Japanese, and Chinese
+
+### System Requirements
+- **Operating System**: Windows 10 version 1809 or later / Windows 11
+- **Architecture**: 64-bit (x64) processors only
+- **Memory**: 512 MB RAM minimum, 1 GB recommended
+- **Disk Space**: 200 MB available space
+- **Privileges**: Administrator rights required for full functionality
+
+### Dependencies Included
+This installer will automatically download and install the following if not present:
+- **.NET 8.0 Runtime**: Required for application execution
+- **Visual C++ Redistributable**: Required for some system operations
+
+### Installation Notes
+- The installer requires administrator privileges to:
+  - Install system-level components
+  - Register file associations
+  - Create scheduled tasks
+  - Access system drivers and hardware information
+
+### Features Overview
+- **System Cleanup**: Remove temporary files, browser cache, and system junk
+- **Driver Updates**: Scan for and install the latest device drivers
+- **Performance Monitoring**: Real-time system performance tracking
+- **Startup Management**: Control which programs start with Windows
+- **Windows Updates**: Manage system updates and installations
+- **File Management**: Advanced file browser with cleaning capabilities
+- **Security**: Safe cleaning with backup options and restore points
+
+### Privacy and Security
+- No data collection or telemetry
+- All operations performed locally on your computer
+- Open source code available for review
+- Regular security updates through GitHub releases
+
+### Support
+- GitHub Issues: https://github.com/gabrielsk12/System-Cleaner/issues
+- Documentation: https://github.com/gabrielsk12/System-Cleaner
+- License: MIT (Open Source)
+
+## Installation Process
+
+1. **Prerequisites Check**: The installer will verify your system meets the minimum requirements
+2. **Dependency Installation**: Automatic download and installation of required runtimes
+3. **Application Installation**: Copy program files to the selected directory
+4. **Configuration**: Set up file associations and optional startup entries
+5. **Completion**: Launch the application and begin system optimization
+
+## Post-Installation
+
+After installation, you can:
+- Launch the application from the Start Menu or Desktop shortcut
+- Configure cleaning schedules and preferences
+- Run your first system scan and cleanup
+- Enable automatic maintenance if desired
+
+## Uninstallation
+
+To remove Windows System Cleaner Pro:
+1. Use "Add or Remove Programs" in Windows Settings
+2. Select "Windows System Cleaner Pro" and click Uninstall
+3. The uninstaller will remove all components and registry entries
+4. Scheduled tasks and startup entries will be cleaned automatically
+
+Thank you for choosing Windows System Cleaner Pro!
