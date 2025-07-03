@@ -252,4 +252,45 @@ namespace WindowsCleaner.Models
             return true;
         }
     }
+
+    public class FileSystemItemInfo : INotifyPropertyChanged
+    {
+        public string Name { get; set; } = string.Empty;
+        public string FullPath { get; set; } = string.Empty;
+        public bool IsDirectory { get; set; }
+        public long Size { get; set; }
+        public DateTime LastModified { get; set; }
+        public string Extension { get; set; } = string.Empty;
+        public string DisplaySize => FormatBytes(Size);
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+
+        private static string FormatBytes(long bytes)
+        {
+            const int scale = 1024;
+            string[] orders = { "GB", "MB", "KB", "Bytes" };
+            long max = (long)Math.Pow(scale, orders.Length - 1);
+
+            foreach (string order in orders)
+            {
+                if (bytes > max)
+                    return $"{decimal.Divide(bytes, max):##.##} {order}";
+                max /= scale;
+            }
+            return "0 Bytes";
+        }
+    }
 }

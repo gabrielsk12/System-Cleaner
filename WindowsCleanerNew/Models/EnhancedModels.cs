@@ -244,7 +244,7 @@ namespace WindowsCleaner.Models
     public class EnhancedAppSettings : AppSettings
     {
         public AnimationSettings Animations { get; set; } = new();
-        public string Language { get; set; } = "en-US";
+        public new string Language { get; set; } = "en-US";
         public bool EnableCrashReporting { get; set; } = true;
         public bool AutoCheckDriverUpdates { get; set; } = false;
         public bool AutoCheckWindowsUpdates { get; set; } = true;

@@ -14,7 +14,7 @@ namespace WindowsCleaner.ViewModels
     /// <summary>
     /// ViewModel for the Driver Updates view
     /// </summary>
-    public class DriverUpdatesViewModel : BaseViewModel, IDisposable
+    public partial class DriverUpdatesViewModel : BaseViewModel, IDisposable
     {
         private readonly DriverService _driverService;
         private readonly LoggingService _loggingService;
@@ -44,7 +44,7 @@ namespace WindowsCleaner.ViewModels
             
             ScanDriversCommand = new RelayCommand(async () => await ScanDriversAsync(), () => !IsScanning && !IsUpdating);
             UpdateAllDriversCommand = new RelayCommand(async () => await UpdateAllDriversAsync(), () => HasUpdatesAvailable && !IsScanning && !IsUpdating);
-            UpdateDriverCommand = new RelayCommand<DriverInfo>(async (driver) => await UpdateDriverAsync(driver), (driver) => driver?.HasUpdate == true && !IsScanning && !IsUpdating);
+            UpdateDriverCommand = new RelayCommand<DriverInfo>(async (driver) => await UpdateDriverAsync(driver!), (driver) => driver?.HasUpdate == true && !IsScanning && !IsUpdating);
             CancelCommand = new RelayCommand(CancelOperation, () => IsScanning || IsUpdating);
             
             LoadDriversAsync();
@@ -443,7 +443,7 @@ namespace WindowsCleaner.ViewModels
             catch (Exception ex)
             {
                 _loggingService.LogError($"Failed to update driver: {driver.DeviceName}", ex);
-                StatusText = _localizationService.GetString("FailedToUpdateDriver", "Failed to update {0}. Please try again.", driver.DeviceName);
+                StatusText = _localizationService.GetFormattedString("FailedToUpdateDriver", driver.DeviceName);
                 
                 // Show error to user in the UI
                 MessageBox.Show(

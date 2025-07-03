@@ -1,0 +1,71 @@
+# Final configuration for the project
+
+# List of necessary files for a clean source code
+$necessaryFiles = @(
+    # Project files
+    "WindowsCleaner/WindowsCleaner.csproj",
+    
+    # Core source files
+    "WindowsCleaner/App.xaml",
+    "WindowsCleaner/App.xaml.cs",
+    
+    # ViewModels
+    "WindowsCleaner/ViewModels/*.cs",
+    
+    # Views
+    "WindowsCleaner/Views/*.xaml",
+    "WindowsCleaner/Views/*.cs",
+    
+    # Models
+    "WindowsCleaner/Models/*.cs",
+    
+    # Services
+    "WindowsCleaner/Services/*.cs",
+    
+    # Converters
+    "WindowsCleaner/Converters/*.cs",
+    
+    # Resources
+    "WindowsCleaner/Resources/Strings/*.resx",
+    "WindowsCleaner/Resources/ResourceDictionaries/*.xaml",
+    
+    # Build scripts
+    "build-clean.ps1",
+    "build-exe.ps1",
+    "setup.ps1",
+    "cleanup.ps1",
+    
+    # Git files
+    ".gitignore",
+    
+    # Icon file
+    "win.png"
+)
+
+# Files to delete (everything not in the necessary files list)
+$unnecessaryFiles = @(
+    # Temporary files
+    "*.user",
+    "*.suo",
+    "*.tmp",
+    "*.temp",
+    "*.log",
+    "*.bak",
+    "*.cache",
+    
+    # Build artifacts
+    "WindowsCleaner/bin/**/*",
+    "WindowsCleaner/obj/**/*",
+    
+    # Release and installer folders
+    "Release/**/*",
+    "Installer/**/*",
+    
+    # VS Code/Visual Studio files
+    ".vs/**/*",
+    ".vscode/**/*",
+    "*.sln.DotSettings.user"
+)
+
+Write-Host "This file lists the necessary files for clean source code and files that should be deleted."
+Write-Host "Use the cleanup.ps1 script to clean your project."

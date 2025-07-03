@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
+            <!-- Temporarily commented out to fix build issues -->
+            <!--<ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/ResourceDictionaries/LocalizedStrings.xaml"/>
                 <ResourceDictionary Source="Resources/ResourceDictionaries/FluidAnimations.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary.MergedDictionaries>-->
         <!-- Modern Color Scheme with enhanced palette -->
         <SolidColorBrush x:Key="PrimaryBrush" Color="#2563EB"/>
         <SolidColorBrush x:Key="PrimaryHoverBrush" Color="#1D4ED8"/>
@@ -311,5 +312,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

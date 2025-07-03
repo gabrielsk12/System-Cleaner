@@ -14,7 +14,7 @@ namespace WindowsCleaner.ViewModels
     /// <summary>
     /// ViewModel for the Windows Updates view
     /// </summary>
-    public class WindowsUpdatesViewModel : BaseViewModel, IDisposable
+    public partial class WindowsUpdatesViewModel : BaseViewModel, IDisposable
     {
         private readonly WindowsUpdateService _updateService;
         private readonly LoggingService _loggingService;
@@ -56,7 +56,7 @@ namespace WindowsCleaner.ViewModels
                 () => HasPendingUpdates && !IsChecking && !IsInstalling);
                 
             InstallUpdateCommand = new RelayCommand<PendingUpdate>(
-                async (update) => await InstallUpdateAsync(update), 
+                async (update) => await InstallUpdateAsync(update!), 
                 (update) => update != null && !IsChecking && !IsInstalling);
                 
             CancelCommand = new RelayCommand(

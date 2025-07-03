@@ -15,6 +15,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>WindowsCleaner</RootNamespace>
+    <!-- Resource handling -->
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -29,62 +31,32 @@
     <PackageReference Include="Microsoft.WindowsAPICodePack-Shell" Version="1.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Management" Version="8.0.0" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="8.0.0" />
     <PackageReference Include="TaskScheduler" Version="2.10.1" />
     <PackageReference Include="System.Text.Json" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\CrashReportWindow.xaml.cs">
-      <DependentUpon>CrashReportWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\DriverUpdatesView.xaml.cs">
-      <DependentUpon>DriverUpdatesView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\WindowsUpdatesView.xaml.cs">
-      <DependentUpon>WindowsUpdatesView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\StartupProgramsView.xaml.cs">
-      <DependentUpon>StartupProgramsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="ViewModels\DriverUpdatesViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViewModels\WindowsUpdatesViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="ViewModels\StartupProgramsViewModel.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Resource Include="Resources\Icons\win.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <None Remove="Views\MainWindowNew.xaml" />
+    <Page Remove="Views\MainWindowNew.xaml" />
+    <Compile Remove="Views\MainWindowNew.xaml.cs" />
   </ItemGroup>
-
+  
   <ItemGroup>
-    <Page Include="Views\CrashReportWindow.xaml">
+    <!-- Include all XAML files as Page -->
+    <Page Include="**\*.xaml" Exclude="App.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\DriverUpdatesView.xaml">
+    <!-- Application definition file -->
+    <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\WindowsUpdatesView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\StartupProgramsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\ResourceDictionaries\LocalizedStrings.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\ResourceDictionaries\FluidAnimations.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\ResourceDictionaries\EnhancedControls.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
   </ItemGroup>
-
-  <PropertyGroup>
-    <!-- Disable default embedded resource handling to avoid NETSDK1022 errors -->
-    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
-  </PropertyGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Strings\*.resx">

@@ -1,0 +1,170 @@
+﻿<Window x:Class="WindowsCleaner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WindowsCleaner"
+        mc:Ignorable="d"
+        Title="Windows System Cleaner Pro" Height="700" Width="1000"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BackgroundBrush}"
+        ResizeMode="CanResize"
+        MinWidth="800" MinHeight="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Header -->
+        <Border Grid.Row="0" Background="{StaticResource PrimaryBrush}" Padding="20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="🧹" FontSize="24" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <StackPanel>
+                        <TextBlock Text="Windows System Cleaner Pro" 
+                                   FontSize="20" FontWeight="Bold" 
+                                   Foreground="White"/>
+                        <TextBlock Text="Professional system optimization tool" 
+                                   FontSize="12" 
+                                   Foreground="#E2E8F0"/>
+                    </StackPanel>
+                </StackPanel>
+                
+                <Button Grid.Column="1" 
+                        Content="Settings" 
+                        Style="{StaticResource ModernButton}"
+                        Background="{StaticResource AccentBrush}"
+                        Padding="15,8"/>
+            </Grid>
+        </Border>
+        
+        <!-- Main Content -->
+        <ScrollViewer Grid.Row="1" Margin="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <!-- Quick Actions -->
+                <Border Grid.Row="0" Style="{StaticResource CardStyle}" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="Quick Actions" FontSize="18" FontWeight="Bold" 
+                                   Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,15"/>
+                        
+                        <UniformGrid Rows="2" Columns="2" Margin="0,10">
+                            <Button Content="🗑️ Clean Temporary Files" 
+                                    Style="{StaticResource ModernButton}" 
+                                    Margin="5" Height="60"/>
+                            <Button Content="🔧 Registry Cleanup" 
+                                    Style="{StaticResource ModernButton}" 
+                                    Margin="5" Height="60"/>
+                            <Button Content="📁 Disk Cleanup" 
+                                    Style="{StaticResource ModernButton}" 
+                                    Margin="5" Height="60"/>
+                            <Button Content="⚡ System Optimization" 
+                                    Style="{StaticResource ModernButton}" 
+                                    Margin="5" Height="60"/>
+                        </UniformGrid>
+                    </StackPanel>
+                </Border>
+                
+                <!-- System Status -->
+                <Border Grid.Row="1" Style="{StaticResource CardStyle}" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="System Status" FontSize="18" FontWeight="Bold" 
+                                   Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,15"/>
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                                <TextBlock Text="Available Space:" FontWeight="SemiBold"/>
+                                <ProgressBar Value="75" Maximum="100" Height="20" 
+                                             Style="{StaticResource ModernProgressBar}" Margin="0,5"/>
+                                <TextBlock Text="75% Free (250 GB)" FontSize="12" 
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                            </StackPanel>
+                            
+                            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                                <TextBlock Text="System Health:" FontWeight="SemiBold"/>
+                                <ProgressBar Value="92" Maximum="100" Height="20" 
+                                             Style="{StaticResource ModernProgressBar}" Margin="0,5"/>
+                                <TextBlock Text="92% Optimized" FontSize="12" 
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+                
+                <!-- Recent Activity -->
+                <Border Grid.Row="2" Style="{StaticResource CardStyle}">
+                    <StackPanel>
+                        <TextBlock Text="Recent Activity" FontSize="18" FontWeight="Bold" 
+                                   Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,15"/>
+                        
+                        <ListView Height="200" Background="Transparent" BorderThickness="0">
+                            <ListViewItem>
+                                <StackPanel>
+                                    <TextBlock Text="System scan completed" FontWeight="SemiBold"/>
+                                    <TextBlock Text="Found 150 temporary files (2.3 GB)" FontSize="12" 
+                                               Foreground="{StaticResource TextSecondaryBrush}"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem>
+                                <StackPanel>
+                                    <TextBlock Text="Registry cleanup completed" FontWeight="SemiBold"/>
+                                    <TextBlock Text="Removed 25 invalid entries" FontSize="12" 
+                                               Foreground="{StaticResource TextSecondaryBrush}"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem>
+                                <StackPanel>
+                                    <TextBlock Text="Disk optimization completed" FontWeight="SemiBold"/>
+                                    <TextBlock Text="Defragmented 3 drives" FontSize="12" 
+                                               Foreground="{StaticResource TextSecondaryBrush}"/>
+                                </StackPanel>
+                            </ListViewItem>
+                        </ListView>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </ScrollViewer>
+        
+        <!-- Footer -->
+        <Border Grid.Row="2" Background="{StaticResource SurfaceBrush}" 
+                BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0" 
+                Padding="20,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Grid.Column="0" Text="Ready" 
+                           VerticalAlignment="Center" 
+                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <TextBlock Text="Last scan: Today 2:30 PM" 
+                               VerticalAlignment="Center" Margin="0,0,20,0"
+                               Foreground="{StaticResource TextSecondaryBrush}"/>
+                    <Button Content="Start Full Scan" 
+                            Style="{StaticResource SuccessButton}" 
+                            Padding="20,8"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
