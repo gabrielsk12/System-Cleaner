@@ -1,7 +1,6 @@
 using System.IO;
 using System.Text.Json;
 using Microsoft.Win32;
-using Microsoft.Win32.TaskScheduler;
 using WindowsCleaner.Models;
 
 namespace WindowsCleaner.Services
@@ -109,46 +108,9 @@ namespace WindowsCleaner.Services
 
             try
             {
-                using var taskService = new TaskService();
-                
-                // Remove existing task
-                RemoveScheduledTask();
-
-                // Create new task
-                var task = taskService.NewTask();
-                task.RegistrationInfo.Description = "Automatic Windows system cleaning";
-                task.Principal.RunLevel = TaskRunLevel.Highest;
-
-                // Set trigger based on frequency
-                Trigger trigger = _settings.ScheduleSettings.Frequency switch
-                {
-                    ScheduleFrequency.Daily => new DailyTrigger 
-                    { 
-                        StartBoundary = DateTime.Today.Add(_settings.ScheduleSettings.Time) 
-                    },
-                    ScheduleFrequency.Weekly => new WeeklyTrigger((Microsoft.Win32.TaskScheduler.DaysOfTheWeek)(1 << (int)_settings.ScheduleSettings.DayOfWeek)) 
-                    { 
-                        StartBoundary = DateTime.Today.Add(_settings.ScheduleSettings.Time) 
-                    },
-                    ScheduleFrequency.Monthly => new MonthlyTrigger(_settings.ScheduleSettings.DayOfMonth) 
-                    { 
-                        StartBoundary = DateTime.Today.Add(_settings.ScheduleSettings.Time) 
-                    },
-                    _ => new DailyTrigger { StartBoundary = DateTime.Today.Add(_settings.ScheduleSettings.Time) }
-                };
-
-                task.Triggers.Add(trigger);
-
-                // Set action
-                var exePath = System.Diagnostics.Process.GetCurrentProcess().MainModule?.FileName;
-                if (!string.IsNullOrEmpty(exePath))
-                {
-                    task.Actions.Add(new ExecAction(exePath, "--auto-clean"));
-                }
-
-                // Register task
-                taskService.RootFolder.RegisterTaskDefinition(
-                    "WindowsCleanerPro_AutoClean", task);
+                // TODO: Implement scheduled task creation using Windows Task Scheduler COM interface
+                // or alternative scheduling mechanism
+                System.Diagnostics.Debug.WriteLine("Scheduled task creation not yet implemented");
             }
             catch (Exception ex)
             {
@@ -160,8 +122,8 @@ namespace WindowsCleaner.Services
         {
             try
             {
-                using var taskService = new TaskService();
-                taskService.RootFolder.DeleteTask("WindowsCleanerPro_AutoClean", false);
+                // TODO: Implement scheduled task removal
+                System.Diagnostics.Debug.WriteLine("Scheduled task removal not yet implemented");
             }
             catch
             {
